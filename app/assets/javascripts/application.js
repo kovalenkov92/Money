@@ -19,7 +19,7 @@
 //= require angular-ui-bootstrap-tpls
 //= require angular-animate
 //= require angular-resource
-//= require angular-ui-router
+//= require ui-router/release/angular-ui-router.js
 //= require angular-rails-templates
 //= require angular-drag-and-drop-lists/angular-drag-and-drop-lists.js
 
