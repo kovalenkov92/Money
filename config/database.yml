@@ -5,7 +5,7 @@ default: &default
     database: money
     host: localhost
     pool: 5
-    username: postgres
+    username: john
     password: postgres
 
 
