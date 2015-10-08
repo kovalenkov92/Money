@@ -1,0 +1,37 @@
+(function () {
+  "use strict";
+  var main = angular.module('main', [
+    'ui.router',
+    'templates',
+    'ui.compat',
+    'ui.bootstrap',
+    'dndLists'
+  ]);
+
+  main.config(['$urlRouterProvider', '$stateProvider', function ($urlRouterProvider, $stateProvider) {
+
+    $urlRouterProvider.otherwise('/');
+
+    $stateProvider
+      .state('root', {
+        url: '/',
+        template: "<img src='https://upload.wikimedia.org/wikipedia/commons/3/38/Guitar_Hero_World_Tour_Guitar_Controller_PS3.png' style='height:70vh'>"
+      })
+      .state('date-time', {
+        url: '/date_time',
+        templateUrl: "<%= asset_path('application/templates/date-time.html') %>",
+        controller: 'TestCtrl'
+      })
+      .state('carousel', {
+        url: '/carousel',
+        templateUrl: "<%= asset_path('application/templates/carousel.html') %>",
+        controller: 'TestCtrl'
+      })
+      .state('dnd', {
+        url: '/dnd',
+        templateUrl: "<%= asset_path('application/templates/dnd.html') %>",
+        controller: 'TestCtrl'
+      })
+  }]);
+
+}());

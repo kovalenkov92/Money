@@ -1,0 +1,7 @@
+.row
+  .col-md-12
+    .col-md-4
+      datepicker ng-model="DateTime" show-weeks="true" class="well well-sm" custom-class="getDayClass(date, mode)"
+    .col-md-2
+      tt
+        | {{ DateTime | date }}

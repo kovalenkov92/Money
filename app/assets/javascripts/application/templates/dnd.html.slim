@@ -1,0 +1,10 @@
+.row
+  .col-md-12
+    .col-md-6
+      ul.list-group dnd-list="list2"
+        li.list-group-item ng-repeat="item in list2" dnd-draggable="item" dnd-moved="list2.splice($index, 1)" dnd-effect-allowed="move" dnd-selected="list2.active = item" ng-class="{'active': list2.active == item}"
+          | {{ item.name }}
+    .col-md-6
+      ul.list-group dnd-list="list"
+        li.list-group-item style="list-style-type:none" ng-repeat="item in list" dnd-draggable="item" dnd-moved="list.splice($index, 1)" dnd-effect-allowed="move" dnd-selected="list.active = item" ng-class="{'active': list.active == item}"
+          | {{ item.name }}
