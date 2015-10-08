@@ -32,7 +32,6 @@ gem 'slim-rails'
 
 gem 'angularjs-rails'
 gem 'angular-rails-templates'
-gem 'angular-ui-router-rails', :git => 'git@github.com:rodeschen/angular-ui-router-rails.git'
 gem 'angular-ui-bootstrap-rails'
 
 # Use Capistrano for deployment
