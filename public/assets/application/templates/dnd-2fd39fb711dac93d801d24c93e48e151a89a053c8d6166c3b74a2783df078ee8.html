@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="col-md-6">
+      <ul class="list-group" dnd-list="list2">
+        <li class="list-group-item" dnd-draggable="item" dnd-effect-allowed="move" dnd-moved="list2.splice($index, 1)" dnd-selected="list2.active = item" ng-class="{&#39;active&#39;: list2.active == item}" ng-repeat="item in list2">
+          {{ item.name }}
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <ul class="list-group" dnd-list="list">
+        <li class="list-group-item" dnd-draggable="item" dnd-effect-allowed="move" dnd-moved="list.splice($index, 1)" dnd-selected="list.active = item" ng-class="{&#39;active&#39;: list.active == item}" ng-repeat="item in list" style="list-style-type:none">
+          {{ item.name }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
