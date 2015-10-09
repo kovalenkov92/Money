@@ -6,10 +6,19 @@
       h3 Categories:
       select.form-control ng-model="selected_category" ng-options="category.name for category in categories track by category.id"
       br
-      a.pull-right ng-click="addCategory( )"
+      a.pull-right ng-click="addCategory()"
         i.fa.fa-plus style="cursor: pointer"
-    .col-md-6
-      h3
-    .col-md-3
-      h3 Transactions:
-
+    .col-md-5
+      h3 Outgoes:
+      form name="form"
+        input.form-control name="value" type="text" ng-model="outgoValue"
+        label Comment:
+        input.form-control name="comment" type="text" ng-model="comment"
+        br
+        button.btn.btn-default.pull-right type="submit" ng-click="fixOutgo(outgoValue, 3, comment)"
+          | submit
+    .col-md-4
+      h3 Last transactions:
+      ul.list-group
+        li.list-group-item ng-repeat="transaction in transactions"
+          | {{ transaction.summ | currency : "₴" }} {{ transaction.comment }} {{ transaction.created_at | date }}
