@@ -1,51 +1,69 @@
 (function () {
 
-    "use strict";
+  "use strict";
 
-    angular.module('main').controller('IndexCtrl', [ '$scope', '$state', 'CategoriesFactory', 'BalanceFactory', '$modal',
-        function($scope, $state, categories, balance, $uibModal) {
+  angular.module('main').controller('IndexCtrl', [ '$scope', '$state', 'CategoriesFactory', 'BalanceFactory', 'TransactionsFactory', '$modal',
+    function($scope, $state, categories, balance, transactions, $uibModal) {
 
-        	var getBalance = function() {
-        		balance.getBalance()
-        			.success(function(data) {
-        				$scope.balance = data.balance;
-        			})
-        	};
-        	getBalance();
+      var getBalance = function() {
+        balance.getBalance()
+          .success(function(data) {
+            $scope.balance = data.balance;
+          })
+      };
+      getBalance();
 
-        	var getCategories = function() {
-        		categories.all()
-        			.success(function(data) {
-        				$scope.categories = data.categories;
-        			})
-        	};
-        	getCategories();
+      var getCategories = function() {
+        categories.all()
+          .success(function(data) {
+            $scope.categories = data.categories;
+          })
+      };
+      getCategories();
 
-        	$scope.addCategory = function(size) {
-				    var modalInstance = $uibModal.open({
-				      animation: true,
-				      templateUrl: "<%= asset_path('application/templates/modals/new-category-modal.html') %>",
-				      controller: ['$scope', '$http', '$modalInstance', function($scope, $http, $modalInstance) {
+      $scope.addCategory = function() {
+          var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: "<%= asset_path('application/templates/modals/new-category-modal.html') %>",
+            controller: ['$scope', '$http', '$modalInstance', function($scope, $http, $modalInstance) {
 
-							  $scope.ok = function (name) {
-							    categories.createCategory(name)
-							    	.success(function(data) {
-							    		$modalInstance.close();
-							    		console.log(data);
-							    		getCategories();
-							    	})
-							    	.error(function(data) {
-							    		$scope.errors = data.errors;
-							    	})
-							  };
+                $scope.ok = function (name) {
+                categories.createCategory(name)
+                  .success(function(data) {
+                    $modalInstance.close();
+                    console.log(data);
+                    getCategories();
+                  })
+                  .error(function(data) {
+                    $scope.errors = data.errors;
+                  })
+                };
 
-							  $scope.cancel = function () {
-							    $modalInstance.dismiss('cancel');
-							  };
-				      }],
-				      size: size,
-				    });      		
-        	}
+                $scope.cancel = function () {
+                $modalInstance.dismiss('cancel');
+                };
+            }],
+          });         
+      };
 
-        }])
+      var getTransactions = function() {
+        transactions.all()
+          .success(function(data) {
+            $scope.transactions = data.transactions;
+          })
+          .error(function(data) {
+            console.log(data);
+          })
+      };
+      getTransactions();
+
+      $scope.fixOutgo = function(value, id, comment) {
+        transactions.createTransaction(value, id, comment)
+          .success(function(data) {
+            getBalance();
+            console.log(data);
+          })
+      };
+
+    }])
 }());
