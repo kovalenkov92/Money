@@ -22,6 +22,5 @@
 //= require ui-router/release/angular-ui-router.js
 //= require angular-rails-templates
 //= require angular-drag-and-drop-lists/angular-drag-and-drop-lists.js
-
 //= require ./application/modules/main.module.js
 //= require_tree ./application

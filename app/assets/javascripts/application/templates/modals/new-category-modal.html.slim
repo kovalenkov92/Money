@@ -1,0 +1,8 @@
+.modal-header
+  h3 class="modal-title" New category:
+  .modal-body
+    input.form-control type="text" ng-model="category_name"
+    small.error ng-show="errors" required
+  .modal-footer
+    button class="btn btn-primary" type="button" ng-click="ok(category_name)" OK
+    button class="btn btn-warning" type="button" ng-click="cancel()" Cancel

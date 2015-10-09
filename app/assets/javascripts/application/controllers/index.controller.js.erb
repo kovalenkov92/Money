@@ -1,0 +1,51 @@
+(function () {
+
+    "use strict";
+
+    angular.module('main').controller('IndexCtrl', [ '$scope', '$state', 'CategoriesFactory', 'BalanceFactory', '$modal',
+        function($scope, $state, categories, balance, $uibModal) {
+
+        	var getBalance = function() {
+        		balance.getBalance()
+        			.success(function(data) {
+        				$scope.balance = data.balance;
+        			})
+        	};
+        	getBalance();
+
+        	var getCategories = function() {
+        		categories.all()
+        			.success(function(data) {
+        				$scope.categories = data.categories;
+        			})
+        	};
+        	getCategories();
+
+        	$scope.addCategory = function(size) {
+				    var modalInstance = $uibModal.open({
+				      animation: true,
+				      templateUrl: "<%= asset_path('application/templates/modals/new-category-modal.html') %>",
+				      controller: ['$scope', '$http', '$modalInstance', function($scope, $http, $modalInstance) {
+
+							  $scope.ok = function (name) {
+							    categories.createCategory(name)
+							    	.success(function(data) {
+							    		$modalInstance.close();
+							    		console.log(data);
+							    		getCategories();
+							    	})
+							    	.error(function(data) {
+							    		$scope.errors = data.errors;
+							    	})
+							  };
+
+							  $scope.cancel = function () {
+							    $modalInstance.dismiss('cancel');
+							  };
+				      }],
+				      size: size,
+				    });      		
+        	}
+
+        }])
+}());

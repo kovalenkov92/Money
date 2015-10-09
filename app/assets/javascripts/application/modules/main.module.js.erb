@@ -7,6 +7,12 @@
     'dndLists'
   ]);
 
+  main.run(['$http', '$rootScope', function($http, $rootScope){
+    var csrf_token = $('meta[name="csrf-token"]').attr('content');
+    $http.defaults.headers.common['X-CSRF-Token'] = csrf_token;
+    $http.defaults.headers.common['Time-Offset']  = -(new Date().getTimezoneOffset() / 60);
+  }]);
+
   main.config(['$urlRouterProvider', '$stateProvider', function ($urlRouterProvider, $stateProvider) {
 
     $urlRouterProvider.otherwise('/');
@@ -14,7 +20,8 @@
     $stateProvider
       .state('root', {
         url: '/',
-        template: "<img src='https://upload.wikimedia.org/wikipedia/commons/3/38/Guitar_Hero_World_Tour_Guitar_Controller_PS3.png' style='height:70vh'>"
+        templateUrl: "<%= asset_path('application/templates/index.html') %>",
+        controller: "IndexCtrl"
       })
       .state('date-time', {
         url: '/date_time',

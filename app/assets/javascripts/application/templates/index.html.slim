@@ -1,0 +1,15 @@
+.row
+  .col-md-12
+    h2 style="color:green"
+      | Balance is {{balance.value}}
+    .col-md-3
+      h3 Categories:
+      select.form-control ng-model="selected_category" ng-options="category.name for category in categories track by category.id"
+      br
+      a.pull-right ng-click="addCategory( )"
+        i.fa.fa-plus style="cursor: pointer"
+    .col-md-6
+      h3
+    .col-md-3
+      h3 Transactions:
+

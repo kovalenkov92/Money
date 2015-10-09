@@ -7,9 +7,6 @@
   <%= csrf_meta_tags %>
 </head>
 <body ng-app="main" ng-controller="RootCtrl">
-        <div ng-include="'<%= asset_path('application/templates/_header.html') %>'"></div>
-
-    <div class="container well" ui-view></div>
-
+    <%= yield %>
 </body>
 </html>
