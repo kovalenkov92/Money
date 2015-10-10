@@ -2,23 +2,38 @@
   .col-md-12
     h2 style="color:green"
       | Balance is {{balance.value}}
-    .col-md-3
-      h3 Categories:
-      select.form-control ng-model="selected_category" ng-options="category.name for category in categories track by category.id"
+    select.form-control placeholder="Category" ng-model="selected_category" ng-options="category.name for category in categories track by category.id"
+      option value="" disabled=true selected=true Category
+    a.pull-right ng-click="addCategory()"
+      i.fa.fa-plus style="cursor: pointer"
+    small.error ng-show="transaction_errors.category_id" You have to chose category. &nbsp;
+    small.error ng-show="transaction_errors.summ" Summ is required, should be greater than 0
+    br
+    .col-md-6
+      h3 Outgo:
       br
-      a.pull-right ng-click="addCategory()"
-        i.fa.fa-plus style="cursor: pointer"
-    .col-md-5
-      h3 Outgoes:
-      form name="form"
-        input.form-control name="value" type="text" ng-model="outgoValue"
-        label Comment:
-        input.form-control name="comment" type="text" ng-model="comment"
+      form name="form" novalidate=true
+        input.form-control name="value" placeholder="Summ" type="number" step="0.01" min="0.01" ng-model="outgoValue"
         br
-        button.btn.btn-default.pull-right type="submit" ng-click="fixOutgo(outgoValue, 3, comment)"
+        input.form-control placeholder="Comment" name="outgoComment" type="text" ng-model="outgoComment"
+        br
+        button.btn.btn-default.pull-right type="submit" ng-click="fixOutgo(outgoValue, selected_category, outgoComment)"
           | submit
-    .col-md-4
-      h3 Last transactions:
-      ul.list-group
-        li.list-group-item ng-repeat="transaction in transactions"
-          | {{ transaction.summ | currency : "₴" }} {{ transaction.comment }} {{ transaction.created_at | date }}
+    .col-md-6
+      br
+      h3 Income:
+      form name="incomeForm"
+      input.form-control name="income" placeholder="Summ" type="number" step="0.01" min="0.01" ng-model="incomeValue"
+      br
+      input.form-control placeholder="Comment" name="incomeComment" type="text" ng-model="incomeComment"
+      br
+      button.btn.btn-default.pull-right type="submit" ng-click="fixIncome(incomeValue, selected_category, incomeComment)"
+        | submit
+.row
+  .col-md-12 ng-show="transactions.length"
+    h3 Last transactions:
+    ul.list-group
+      li.list-group-item ng-repeat="transaction in transactions" ng-class="transaction.summ > 0 ? 'income' : 'outgo'"
+        | {{ transaction.summ | currency : "₴" }} {{ transaction.comment != null ? "| " + transaction.comment : "" }} {{ "| " + (transaction.created_at | date) }}
+        a.pull-right ng-click="removeTransaction(transaction.id)"
+          i.fa.fa-close style="cursor: pointer"

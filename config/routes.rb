@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     get :index
   end
 
-  resources :categories, only: [:index, :create] do
+  resources :categories do
     collection do
     end
   end

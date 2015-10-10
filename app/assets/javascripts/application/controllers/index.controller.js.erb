@@ -31,7 +31,6 @@
                 categories.createCategory(name)
                   .success(function(data) {
                     $modalInstance.close();
-                    console.log(data);
                     getCategories();
                   })
                   .error(function(data) {
@@ -57,10 +56,57 @@
       };
       getTransactions();
 
-      $scope.fixOutgo = function(value, id, comment) {
-        transactions.createTransaction(value, id, comment)
+      $scope.fixOutgo = function(value, category, comment) {
+        $scope.transaction_errors = false;
+        
+        if (!category) {
+          category = null;
+        }else{
+          category = category.id;
+        }
+
+        value = - value;
+
+        transactions.createTransaction(value, category, comment)
           .success(function(data) {
             getBalance();
+            getCategories();
+            getTransactions();
+          })
+          .error(function(data) {
+            console.log(data);
+            $scope.transaction_errors = data.errors;
+          });
+      };
+
+      $scope.fixIncome = function(value, category, comment) {
+
+        if (!category) {
+          category = null;
+        }else{
+          category = category.id;
+        }
+        
+        transactions.createTransaction(value, category, comment)
+          .success(function(data) {
+            getBalance();
+            getCategories();
+            getTransactions();
+          })
+          .error(function(data) {
+            console.log(data);
+            $scope.transaction_errors = data.errors;
+          });
+      };
+
+      $scope.removeTransaction = function(id) {
+        transactions.deleteTransaction(id)
+          .success(function(data) {
+            getBalance();
+            getCategories();
+            getTransactions();
+          })
+          .error(function(data) {
             console.log(data);
           })
       };

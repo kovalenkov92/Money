@@ -38,6 +38,11 @@
         templateUrl: "<%= asset_path('application/templates/dnd.html') %>",
         controller: 'TestCtrl'
       })
+      .state('chart', {
+        url: '/chart',
+        templateUrl: "<%= asset_path('application/templates/chart.html') %>",
+        controller: 'ChartCtrl'
+      })
   }]);
 
 }());

@@ -6,10 +6,13 @@
         return $http.get('/transactions');
       },
       createTransaction: function (summ, category_id, comment) {
-        return $http.post('/transactions', {transaction: {summ: -summ, 
+        return $http.post('/transactions', {transaction: {summ: summ, 
                                                           category_id: category_id, 
                                                           comment: comment}
                                             });
+      },
+      deleteTransaction: function(id) {
+        return $http.delete('/transactions/' + id);
       }
     };
   }])
