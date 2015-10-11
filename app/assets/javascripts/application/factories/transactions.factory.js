@@ -13,6 +13,9 @@
       },
       deleteTransaction: function(id) {
         return $http.delete('/transactions/' + id);
+      },
+      getGraphData: function(from, to) {
+        return $http.get('/transactions/generate_graph?from=' + from + '&to=' + to);
       }
     };
   }])

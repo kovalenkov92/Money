@@ -1,0 +1,11 @@
+.modal-header
+  h3 class="modal-title" Fix income:
+.modal-body
+  input.form-control type="number" ng-model="incomeValue" placeholder="Value" min="0.01" step="0.01"
+  small.error ng-show="income_errors" required
+  br
+  input.form-control type="text" ng-model="incomeComment" placeholder="Comment"
+  small.error ng-show="errors" required
+.modal-footer
+  button class="btn btn-primary" type="button" ng-click="ok(incomeValue, incomeComment)" OK
+  button class="btn btn-warning" type="button" ng-click="cancel()" Cancel

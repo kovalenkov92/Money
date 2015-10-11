@@ -1,7 +1,15 @@
 class TransactionsController < ApplicationController
 
   def index
-    transactions = Transaction.all.order(created_at: :desc).limit(10)
+    balance = current_account.balance
+    categories = balance.categories
+
+    transactions = []
+
+    categories.each do |category|
+      transactions << { category: category.name, transactions: category.transactions }
+    end
+
     render json: {transactions: transactions}
   end
 
@@ -15,9 +23,9 @@ class TransactionsController < ApplicationController
                                       comment: params[:transaction][:comment], 
                                       category_id: params[:transaction][:category_id]
     category = transaction.category
-    balance = Balance.find 1
+    balance = current_account.balance
     if transaction.errors.empty?
-      balance.value = balance.value + transaction.summ
+      balance.value = balance.value - transaction.summ
       balance.save
       category.value = category.value + transaction.summ
       category.save
@@ -31,9 +39,9 @@ class TransactionsController < ApplicationController
   def destroy
     transaction = Transaction.find params[:id]
     category = transaction.category
-    balance = Balance.find 1
+    balance = current_account.balance
     if transaction
-      balance.value = balance.value - transaction.summ
+      balance.value = balance.value + transaction.summ
       balance.save
       category.value = category.value - transaction.summ
       category.save
@@ -42,6 +50,22 @@ class TransactionsController < ApplicationController
     else
       render json: {errors: transaction.errors}, status: :unprocessable_entity
     end
+  end
+
+  def generate_graph
+    balance = current_account.balance
+    categories = balance.categories
+    range = (params[:from].to_date.beginning_of_day..params[:to].to_date.end_of_day)
+
+    response = []
+
+    categories.each do |c|
+      transactions = c.transactions.select{|t| range.cover?(t.created_at)}
+      summ = transactions.map(&:summ).inject(0){ |result, elem| result + elem }
+      response << { name:"#{c.name}", y: summ.abs } unless (summ == 0)
+    end
+
+    render json: {response: response}
   end
 
 end

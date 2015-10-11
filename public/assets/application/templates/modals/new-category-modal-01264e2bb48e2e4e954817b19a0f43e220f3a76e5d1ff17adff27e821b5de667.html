@@ -1,0 +1,11 @@
+<div class="modal-header">
+  <h3 class="modal-title">
+    New category:
+  </h3>
+</div>
+<div class="modal-body">
+  <input class="form-control" ng-model="category_name" placeholder="Name" type="text" /><small class="error" ng-show="errors">required</small>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="ok(category_name)" type="button">OK</button><button class="btn btn-warning" ng-click="cancel()" type="button">Cancel</button>
+</div>

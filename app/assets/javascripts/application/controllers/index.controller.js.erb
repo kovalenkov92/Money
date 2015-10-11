@@ -2,16 +2,27 @@
 
   "use strict";
 
-  angular.module('main').controller('IndexCtrl', [ '$scope', '$state', 'CategoriesFactory', 'BalanceFactory', 'TransactionsFactory', '$modal',
-    function($scope, $state, categories, balance, transactions, $uibModal) {
+  angular.module('main').controller('IndexCtrl', [ '$scope', '$state', 'CategoriesFactory', 'BalancesFactory', 'TransactionsFactory', '$modal', 'IncomesFactory',
+    function($scope, $state, categories, balances, transactions, $uibModal, incomes) {
 
       var getBalance = function() {
-        balance.getBalance()
+        balances.getBalance()
           .success(function(data) {
             $scope.balance = data.balance;
           })
       };
       getBalance();
+
+      var getIncomes = function() {
+        incomes.index()
+          .success(function(data) {
+            $scope.incomes = data.incomes;
+          })
+          .error(function(data) {
+            console.log(data);
+          })
+      };
+      getIncomes();
 
       var getCategories = function() {
         categories.all()
@@ -65,8 +76,6 @@
           category = category.id;
         }
 
-        value = - value;
-
         transactions.createTransaction(value, category, comment)
           .success(function(data) {
             getBalance();
@@ -79,36 +88,81 @@
           });
       };
 
-      $scope.fixIncome = function(value, category, comment) {
+      $scope.fixIncome = function() {
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: "<%= asset_path('application/templates/modals/confirm-income-dialog.html') %>",
+            controller: ['$scope', '$http', '$modalInstance', function($scope, $http, $modalInstance) {
 
-        if (!category) {
-          category = null;
-        }else{
-          category = category.id;
-        }
+                $scope.ok = function (value, comment) {
+                  incomes.update(value, comment)
+                    .success(function(data) {
+                      $modalInstance.close();
+                      getBalance();
+                      getIncomes();
+                    })
+                    .error(function(data) {
+                      $scope.income_errors = data.errors;
+                    });
+                };
+
+                $scope.cancel = function () {
+                $modalInstance.dismiss('cancel');
+                };
+            }],
+        });
         
-        transactions.createTransaction(value, category, comment)
-          .success(function(data) {
-            getBalance();
-            getCategories();
-            getTransactions();
-          })
-          .error(function(data) {
-            console.log(data);
-            $scope.transaction_errors = data.errors;
-          });
       };
 
       $scope.removeTransaction = function(id) {
-        transactions.deleteTransaction(id)
-          .success(function(data) {
-            getBalance();
-            getCategories();
-            getTransactions();
-          })
-          .error(function(data) {
-            console.log(data);
-          })
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: "<%= asset_path('application/templates/modals/confirm-dialog.html') %>",
+            controller: ['$scope', '$http', '$modalInstance', function($scope, $http, $modalInstance) {
+
+                $scope.ok = function () {
+                  transactions.deleteTransaction(id)
+                    .success(function(data) {
+                      $modalInstance.close();
+                      getTransactions();
+                      getCategories();
+                      getBalance();
+                    })
+                    .error(function(data) {
+                      console.log(data);
+                    })
+                };
+
+                $scope.cancel = function () {
+                  $modalInstance.dismiss('cancel');
+                };
+            }],
+        });
+      };
+
+      $scope.removeIncome = function(id) {
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: "<%= asset_path('application/templates/modals/confirm-dialog.html') %>",
+            controller: ['$scope', '$http', '$modalInstance', function($scope, $http, $modalInstance) {
+
+                $scope.ok = function () {
+                  incomes.deleteIncome(id)
+                    .success(function(data) {
+                      $modalInstance.close();
+                      getBalance();
+                      getIncomes();
+                    })
+                    .error(function(data) {
+                      console.log(data);
+                    });
+                };
+
+                $scope.cancel = function () {
+                  $modalInstance.dismiss('cancel');
+                };
+            }],
+        });
       };
 
     }])

@@ -1,9 +1,8 @@
 class BalancesController < ApplicationController
 
 	def index
-		balance = Balance.first
-		render json: { balance: balance }
+    account = current_account
+		render json: { balance: account.balance }
 	end
-
 
 end

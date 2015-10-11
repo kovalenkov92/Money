@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   devise_scope :account do
     get "login", to: "devise/sessions#new"
     get "logout", to: "devise/sessions#destroy"
+    get "signup", to: "devise/account#new"
   end
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
@@ -17,8 +18,14 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :incomes do
+    collection do
+    end
+  end
+
   resources :transactions do
     collection do
+      get :generate_graph
     end
   end
 

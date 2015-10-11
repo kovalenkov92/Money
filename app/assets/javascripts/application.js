@@ -23,6 +23,7 @@
 //= require angular-rails-templates
 //= require angular-drag-and-drop-lists/angular-drag-and-drop-lists.js
 //= require highcharts.js
+//= require highcharts-3d.js
 //= require modules.exporting.js
 
 
