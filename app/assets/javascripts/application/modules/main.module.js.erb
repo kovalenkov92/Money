@@ -27,6 +27,11 @@
         templateUrl: "<%= asset_path('application/templates/chart.html') %>",
         controller: 'ChartCtrl'
       })
+      .state('t-management', {
+        url: '/t_management',
+        templateUrl: "<%= asset_path('application/templates/transactions-management.html') %>",
+        controller: "ManagementCtrl"
+      })
   }]);
 
 }());

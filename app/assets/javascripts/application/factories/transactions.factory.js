@@ -23,6 +23,12 @@
       },
       getGraphData: function(from, to) {
         return $http.get('/transactions/generate_graph?from=' + from + '&to=' + to);
+      },
+      startSearch: function(query) {
+        if (query === undefined) {
+          query = "";
+        };
+        return $http.get('/transactions/search?query=' + query);
       }
     };
   }])

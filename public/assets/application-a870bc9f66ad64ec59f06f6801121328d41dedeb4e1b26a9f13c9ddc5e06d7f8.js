@@ -65662,6 +65662,11 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
         templateUrl: "/assets/application/templates/chart-15e17b18a0a23f43140fc65848ccd0ad1b20f1eba2b9642b5488d8874e639bbf.html",
         controller: 'ChartCtrl'
       })
+      .state('t-management', {
+        url: '/t_management',
+        templateUrl: "/assets/application/templates/transactions-management-0ab9d71c081baca5aaac26f62773fbb0fbf476923f3876e8c075a65e774864c8.html",
+        controller: "ManagementCtrl"
+      })
   }]);
 
 }());
@@ -65919,6 +65924,25 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
         }])
 }());
 (function () {
+
+    "use strict";
+
+    angular.module('main').controller('ManagementCtrl', [ '$scope', '$state', 'TransactionsFactory',
+        function($scope, $state, transactions) {
+
+          $scope.search = function(query) {
+            transactions.startSearch(query)
+              .success(function(data) {
+                $scope.transactions = data.transactions;
+              })
+              .error(function(data) {
+                console.log(data);
+              })
+          };
+          
+        }])
+}());
+(function () {
   'use strict';
   angular.module('main').factory('BalancesFactory', ['$http', function($http){
     return {
@@ -65988,6 +66012,12 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
       },
       getGraphData: function(from, to) {
         return $http.get('/transactions/generate_graph?from=' + from + '&to=' + to);
+      },
+      startSearch: function(query) {
+        if (query === undefined) {
+          query = "";
+        };
+        return $http.get('/transactions/search?query=' + query);
       }
     };
   }])

@@ -7,7 +7,8 @@ class TransactionsController < ApplicationController
     transactions = []
 
     categories.each do |category|
-      transactions << { category: category.name, transactions: category.transactions.order(transaction_time: :desc).limit(10) }
+      transactions << { category: category.name, 
+                        transactions: category.transactions.order(transaction_time: :desc).limit(10) }
     end
 
     render json: {transactions: transactions}
@@ -68,6 +69,30 @@ class TransactionsController < ApplicationController
     end
 
     render json: {response: response}
+  end
+
+  def search
+    balance = current_account.balance
+    categories = balance.categories
+
+    transactions = []
+
+    categories.each do |c|
+      if is_numeric?(params[:query])
+        t = c.transactions.where(summ: params[:query])
+      else
+        t = c.transactions.where("comment LIKE ?", '%' + params[:query] + '%')
+      end
+      transactions << {category: c.name, transactions: t.limit(10)} unless t === []
+    end
+
+    render json: {transactions: transactions}
+  end
+
+  private
+
+  def is_numeric?(obj)
+    obj.to_s == obj.to_i.to_s
   end
 
 end

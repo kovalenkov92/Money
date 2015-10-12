@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-md-12">
+    <h3>
+      Search for transactions:
+    </h3>
+    <form class="col-md-6" name="queryForm">
+      <span>By comment or value:</span><input class="form-control" name="query" ng-model="query" required="" type="text" /><br /><button class="btn btn-default" ng-click="search(query)" ng-disabled="queryForm.query.$invalid" type="submit">Search</button>
+    </form>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <h3 class="error" ng-show="!transactions.length &amp;&amp; transactions">
+      Transactions wasn't found
+    </h3>
+    <h3 ng-show="transactions.length">
+      Founded transactions: 
+    </h3>
+    <ul class="list-group" ng-repeat="category in transactions">
+      <h4 ng-show="category.transactions.length">
+        {{category.category}}
+      </h4>
+      <li class="list-group-item" ng-repeat="transaction in category.transactions">
+        {{ transaction.summ | currency : "₴" }} {{ transaction.comment != null ? "| " + transaction.comment : "" }} {{ "| " + (transaction.transaction_time | date) }}
+      </li>
+    </ul>
+  </div>
+</div>
