@@ -18,10 +18,10 @@
     button.btn.btn-default ng-disabled="!fromDate || !toDate" ng-click="getGraph(fromDate, toDate)" Draw graph
 .row
   .error style="text-align:center" ng-hide="graphData.length || hideError" There were no transactions in given period
-  .col-md-8 ng-show="graphData.length"
+  .col-md-7 ng-show="graphData.length"
     br
-    #chart style=" height: 400px;"
-  .col-md-4 ng-show="graphData.length"  
+    #chart style="height:400px"
+  .col-md-5 ng-show="graphData.length"  
     br
     ul.list-group
       li.list-group-item ng-repeat="data in graphData"

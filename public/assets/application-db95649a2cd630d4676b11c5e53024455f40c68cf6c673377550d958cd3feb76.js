@@ -65638,8 +65638,7 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
   var main = angular.module('main', [
     'ui.router',
     'templates',
-    'ui.bootstrap',
-    'dndLists'
+    'ui.bootstrap'
   ]);
 
   main.run(['$http', '$rootScope', function($http, $rootScope){
@@ -65658,24 +65657,9 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
         templateUrl: "/assets/application/templates/index-183bc1a29965ed2ea18fca61b529206698708bc850afe4b10b40d464f16cd744.html",
         controller: "IndexCtrl"
       })
-      .state('date-time', {
-        url: '/date_time',
-        templateUrl: "/assets/application/templates/date-time-60da054199de397f01753bc4aa998b0d4272ab9da683b11639a5d63e36314668.html",
-        controller: 'TestCtrl'
-      })
-      .state('carousel', {
-        url: '/carousel',
-        templateUrl: "/assets/application/templates/carousel-1726ec4b2b220313644aeaa4ff9201b0b37ed288c150a6205e6b25f97ba360a3.html",
-        controller: 'TestCtrl'
-      })
-      .state('dnd', {
-        url: '/dnd',
-        templateUrl: "/assets/application/templates/dnd-2fd39fb711dac93d801d24c93e48e151a89a053c8d6166c3b74a2783df078ee8.html",
-        controller: 'TestCtrl'
-      })
       .state('chart', {
         url: '/chart',
-        templateUrl: "/assets/application/templates/chart-107ccbfac69562805f0cf40e73e6fb238e7b68ec5ea558e4c5f6c7444035e0b4.html",
+        templateUrl: "/assets/application/templates/chart-15e17b18a0a23f43140fc65848ccd0ad1b20f1eba2b9642b5488d8874e639bbf.html",
         controller: 'ChartCtrl'
       })
   }]);
@@ -65935,40 +65919,6 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
         }])
 }());
 (function () {
-
-    "use strict";
-
-    angular.module('main').controller('TestCtrl', [ '$scope', '$state',
-        function($scope, $state) {
-
-            $scope.list = [
-            	{id: 1, name: 'first'},
-            	{id: 2, name: 'second'},
-            	{id: 3, name: 'third'},
-            	{id: 4, name: 'fourth'},
-            	{id: 5, name: 'fifth'}
-            ];
-
-            $scope.list2 = [
-            	{id: 1, name: 'first'},
-            	{id: 2, name: 'second'},
-            	{id: 3, name: 'third'},
-            	{id: 4, name: 'fourth'},
-            	{id: 5, name: 'fifth'}
-            ];
-
-            $scope.slides = [ 
-            									{"image": "https://www.wonderplugin.com/wp-content/plugins/wonderplugin-lightbox/images/demo-image0.jpg",
-            									 "text": "hello"}, 
-            									{"image": "http://www.gettyimages.in/gi-resources/images/Homepage/Category-Creative/UK/UK_Creative_462809583.jpg",
-            									 "text": "jhkghjfgjh"},
-            									{"image": "http://www.gettyimages.co.uk/landing/assets/static_content/home/109393787_birds.jpg",
-            									 "text": "//placekitten.com/"},
-            								];
-
-        }])
-}());
-(function () {
   'use strict';
   angular.module('main').factory('BalancesFactory', ['$http', function($http){
     return {
@@ -66042,18 +65992,6 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
     };
   }])
 }());
-// This is a manifest file that'll be compiled into application.js, which will include all the files
-// listed below.
-//
-// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
-// or any plugin's vendor/assets/javascripts directory can be referenced here using a relative path.
-//
-// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-// compiled file.
-//
-// Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
-// about supported directives.
-//
 
 
 

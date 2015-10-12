@@ -3,8 +3,7 @@
   var main = angular.module('main', [
     'ui.router',
     'templates',
-    'ui.bootstrap',
-    'dndLists'
+    'ui.bootstrap'
   ]);
 
   main.run(['$http', '$rootScope', function($http, $rootScope){
@@ -22,21 +21,6 @@
         url: '/',
         templateUrl: "<%= asset_path('application/templates/index.html') %>",
         controller: "IndexCtrl"
-      })
-      .state('date-time', {
-        url: '/date_time',
-        templateUrl: "<%= asset_path('application/templates/date-time.html') %>",
-        controller: 'TestCtrl'
-      })
-      .state('carousel', {
-        url: '/carousel',
-        templateUrl: "<%= asset_path('application/templates/carousel.html') %>",
-        controller: 'TestCtrl'
-      })
-      .state('dnd', {
-        url: '/dnd',
-        templateUrl: "<%= asset_path('application/templates/dnd.html') %>",
-        controller: 'TestCtrl'
       })
       .state('chart', {
         url: '/chart',
