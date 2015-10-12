@@ -5,6 +5,8 @@
   angular.module('main').controller('IndexCtrl', [ '$scope', '$state', 'CategoriesFactory', 'BalancesFactory', 'TransactionsFactory', '$modal', 'IncomesFactory',
     function($scope, $state, categories, balances, transactions, $uibModal, incomes) {
 
+      $scope.transaction_time = new Date();
+
       var getBalance = function() {
         balances.getBalance()
           .success(function(data) {
@@ -67,7 +69,7 @@
       };
       getTransactions();
 
-      $scope.fixOutgo = function(value, category, comment) {
+      $scope.fixOutgo = function(value, category, comment, time) {
         $scope.transaction_errors = false;
         
         if (!category) {
@@ -76,7 +78,7 @@
           category = category.id;
         }
 
-        transactions.createTransaction(value, category, comment)
+        transactions.createTransaction(value, category, comment, time)
           .success(function(data) {
             getBalance();
             getCategories();
@@ -93,9 +95,9 @@
             animation: true,
             templateUrl: "<%= asset_path('application/templates/modals/confirm-income-dialog.html') %>",
             controller: ['$scope', '$http', '$modalInstance', function($scope, $http, $modalInstance) {
-
-                $scope.ok = function (value, comment) {
-                  incomes.update(value, comment)
+                $scope.income_time = new Date();
+                $scope.ok = function (value, comment, time) {
+                  incomes.update(value, comment, time)
                     .success(function(data) {
                       $modalInstance.close();
                       getBalance();
@@ -107,7 +109,7 @@
                 };
 
                 $scope.cancel = function () {
-                $modalInstance.dismiss('cancel');
+                  $modalInstance.dismiss('cancel');
                 };
             }],
         });

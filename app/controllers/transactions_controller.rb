@@ -7,7 +7,7 @@ class TransactionsController < ApplicationController
     transactions = []
 
     categories.each do |category|
-      transactions << { category: category.name, transactions: category.transactions }
+      transactions << { category: category.name, transactions: category.transactions.order(transaction_time: :desc).limit(10) }
     end
 
     render json: {transactions: transactions}
@@ -20,8 +20,10 @@ class TransactionsController < ApplicationController
 
   def create
     transaction = Transaction.create  summ: params[:transaction][:summ],
-                                      comment: params[:transaction][:comment], 
+                                      comment: params[:transaction][:comment],
+                                      transaction_time: params[:transaction][:time].to_date,
                                       category_id: params[:transaction][:category_id]
+
     category = transaction.category
     balance = current_account.balance
     if transaction.errors.empty?
@@ -60,7 +62,7 @@ class TransactionsController < ApplicationController
     response = []
 
     categories.each do |c|
-      transactions = c.transactions.select{|t| range.cover?(t.created_at)}
+      transactions = c.transactions.select{|t| range.cover?(t.transaction_time)}
       summ = transactions.map(&:summ).inject(0){ |result, elem| result + elem }
       response << { name:"#{c.name}", y: summ.abs } unless (summ == 0)
     end

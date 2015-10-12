@@ -65655,7 +65655,7 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
     $stateProvider
       .state('root', {
         url: '/',
-        templateUrl: "/assets/application/templates/index-633c76da8b94250ab525a02769839362337f160b4d1a55a805e95ff95bbf0ee3.html",
+        templateUrl: "/assets/application/templates/index-183bc1a29965ed2ea18fca61b529206698708bc850afe4b10b40d464f16cd744.html",
         controller: "IndexCtrl"
       })
       .state('date-time', {
@@ -65759,6 +65759,8 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
   angular.module('main').controller('IndexCtrl', [ '$scope', '$state', 'CategoriesFactory', 'BalancesFactory', 'TransactionsFactory', '$modal', 'IncomesFactory',
     function($scope, $state, categories, balances, transactions, $uibModal, incomes) {
 
+      $scope.transaction_time = new Date();
+
       var getBalance = function() {
         balances.getBalance()
           .success(function(data) {
@@ -65821,7 +65823,7 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
       };
       getTransactions();
 
-      $scope.fixOutgo = function(value, category, comment) {
+      $scope.fixOutgo = function(value, category, comment, time) {
         $scope.transaction_errors = false;
         
         if (!category) {
@@ -65830,7 +65832,7 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
           category = category.id;
         }
 
-        transactions.createTransaction(value, category, comment)
+        transactions.createTransaction(value, category, comment, time)
           .success(function(data) {
             getBalance();
             getCategories();
@@ -65845,11 +65847,11 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
       $scope.fixIncome = function() {
         var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: "/assets/application/templates/modals/confirm-income-dialog-c44d16f11d961727f4b816238698833c136107fac4603e02386a993467828956.html",
+            templateUrl: "/assets/application/templates/modals/confirm-income-dialog-5df381dbbe15d746380a74a4f13f8f5ba2c894fffd5d6ef1dc2d6f04c1f75f08.html",
             controller: ['$scope', '$http', '$modalInstance', function($scope, $http, $modalInstance) {
-
-                $scope.ok = function (value, comment) {
-                  incomes.update(value, comment)
+                $scope.income_time = new Date();
+                $scope.ok = function (value, comment, time) {
+                  incomes.update(value, comment, time)
                     .success(function(data) {
                       $modalInstance.close();
                       getBalance();
@@ -65861,7 +65863,7 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
                 };
 
                 $scope.cancel = function () {
-                $modalInstance.dismiss('cancel');
+                  $modalInstance.dismiss('cancel');
                 };
             }],
         });
@@ -65996,8 +65998,14 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
       index: function() {
         return $http.get('/incomes');
       },
-      update: function(value, comment) {
-        return $http.post('/incomes', {income: {diff: value, comment: comment}});
+      update: function(value, comment, time) {
+        if (time != undefined) {
+          time = time.toString();
+        }else{
+          time = new Date();
+          time = time.toString();
+        };
+        return $http.post('/incomes', {income: {diff: value, comment: comment, time: time}});
       },
       deleteIncome: function(id) {
         return $http.delete('/incomes/' + id);
@@ -66012,10 +66020,17 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
       all: function() {
         return $http.get('/transactions');
       },
-      createTransaction: function (summ, category_id, comment) {
+      createTransaction: function (summ, category_id, comment, time) {
+        if (time != undefined) {
+          time = time.toString();
+        }else{
+          time = new Date();
+          time = time.toString();
+        };
         return $http.post('/transactions', {transaction: {summ: summ, 
                                                           category_id: category_id, 
-                                                          comment: comment}
+                                                          comment: comment,
+                                                          time: time}
                                             });
       },
       deleteTransaction: function(id) {

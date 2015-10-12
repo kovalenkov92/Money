@@ -2,13 +2,15 @@ class IncomesController < ApplicationController
 
   def index
     balance = current_account.balance
-    render json: { incomes: balance.incomes }    
+    incomes = balance.incomes.order(income_time: :desc).limit(5)
+    render json: { incomes: incomes }    
   end
 
   def create
     balance = current_account.balance
     income = Income.create  balance_id: balance.id, 
                             value: params[:income][:diff],
+                            income_time: params[:income][:time].to_date,
                             comment: params[:income][:comment]
 
     if income.errors.empty?

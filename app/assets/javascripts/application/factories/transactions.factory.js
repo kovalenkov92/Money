@@ -5,10 +5,17 @@
       all: function() {
         return $http.get('/transactions');
       },
-      createTransaction: function (summ, category_id, comment) {
+      createTransaction: function (summ, category_id, comment, time) {
+        if (time != undefined) {
+          time = time.toString();
+        }else{
+          time = new Date();
+          time = time.toString();
+        };
         return $http.post('/transactions', {transaction: {summ: summ, 
                                                           category_id: category_id, 
-                                                          comment: comment}
+                                                          comment: comment,
+                                                          time: time}
                                             });
       },
       deleteTransaction: function(id) {
