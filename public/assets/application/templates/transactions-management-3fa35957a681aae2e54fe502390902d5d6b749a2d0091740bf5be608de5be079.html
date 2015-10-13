@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row fade-in">
   <div class="col-md-12">
     <h3>
       Search for transactions:
@@ -10,7 +10,7 @@
 </div>
 <div class="row">
   <div class="col-md-12">
-    <h3 class="error" ng-show="!transactions.length &amp;&amp; transactions">
+    <h3 class="error fade-in" ng-show="!transactions.length &amp;&amp; transactions">
       Transactions wasn't found
     </h3>
     <h3 ng-show="transactions.length">
@@ -20,7 +20,7 @@
       <h4 ng-show="category.transactions.length">
         {{category.category}}
       </h4>
-      <li class="list-group-item outgo" ng-repeat="transaction in category.transactions">
+      <li class="list-group-item outgo fade-in" ng-repeat="transaction in category.transactions">
         {{ transaction.summ | currency : "₴" }} {{ transaction.comment != null ? "| " + transaction.comment : "" }} {{ "| " + (transaction.transaction_time | date) }}
       </li>
     </ul>

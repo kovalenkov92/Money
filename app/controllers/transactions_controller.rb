@@ -2,7 +2,7 @@ class TransactionsController < ApplicationController
 
   def index
     balance = current_account.balance
-    categories = balance.categories
+    categories = balance.categories.order(:name)
 
     transactions = []
 
@@ -68,7 +68,7 @@ class TransactionsController < ApplicationController
 
   def search
     balance = current_account.balance
-    categories = balance.categories
+    categories = balance.categories.order(:name)
 
     transactions = []
 

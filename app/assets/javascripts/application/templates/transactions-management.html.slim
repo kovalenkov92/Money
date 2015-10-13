@@ -1,4 +1,4 @@
-.row
+.row.fade-in
   .col-md-12
     h3 Search for transactions:
     form.col-md-6 name="queryForm"
@@ -13,10 +13,10 @@
     /   button.btn.btn-default type="submit" ng-click="search" Search
 .row
   .col-md-12
-    h3.error ng-show="!transactions.length && transactions" Transactions wasn't found
+    h3.error.fade-in ng-show="!transactions.length && transactions" Transactions wasn't found
     h3 ng-show="transactions.length" Founded transactions: 
     ul.list-group ng-repeat="category in transactions"
       h4 ng-show="category.transactions.length"
         | {{category.category}}
-      li.list-group-item.outgo ng-repeat="transaction in category.transactions"
+      li.list-group-item.outgo.fade-in ng-repeat="transaction in category.transactions"
         | {{ transaction.summ | currency : "₴" }} {{ transaction.comment != null ? "| " + transaction.comment : "" }} {{ "| " + (transaction.transaction_time | date) }}

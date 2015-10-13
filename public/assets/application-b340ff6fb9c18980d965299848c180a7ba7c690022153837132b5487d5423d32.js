@@ -65654,17 +65654,17 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
     $stateProvider
       .state('root', {
         url: '/',
-        templateUrl: "/assets/application/templates/index-b7013cc0fee78b1fa145f884c6c8ec9d9756268ef038a2284bc9ea5b365d266a.html",
+        templateUrl: "/assets/application/templates/index-c9d533ddd54afb603c3ae71ed902391d73bee127066d59dc628edbb621b578e9.html",
         controller: "IndexCtrl"
       })
       .state('chart', {
         url: '/chart',
-        templateUrl: "/assets/application/templates/chart-3e67d9a5adeeaaf82e73b3150f12ad4e8f42ba59467ed1f420368422f373cf68.html",
+        templateUrl: "/assets/application/templates/chart-8caa87b5ab7a6946bd98d06967b54fa7f0e7fbd9b3ccb4e3beb5d48671357433.html",
         controller: 'ChartCtrl'
       })
       .state('t-management', {
         url: '/t_management',
-        templateUrl: "/assets/application/templates/transactions-management-ce429a252b1303264d787685b93f7280fd2a0ce52ffaa6c7d822c3989a01ee50.html",
+        templateUrl: "/assets/application/templates/transactions-management-3fa35957a681aae2e54fe502390902d5d6b749a2d0091740bf5be608de5be079.html",
         controller: "ManagementCtrl"
       })
   }]);
@@ -65754,6 +65754,7 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
         balances.getBalance()
           .success(function(data) {
             $scope.balance = data.balance;
+            $scope.account = data.account;
           })
       };
       getBalance();

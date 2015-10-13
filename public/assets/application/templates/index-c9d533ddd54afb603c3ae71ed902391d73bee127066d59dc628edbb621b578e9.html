@@ -1,6 +1,6 @@
-<div class="row">
+<div class="row fade-in">
   <div class="col-md-12">
-    <h2 style="color:#fff">
+    <h2>
       Balance: {{balance.value | currency : "₴" }}
     </h2>
     <div class="col-md-6">
@@ -20,11 +20,11 @@
       </form>
     </div>
     <div class="col-md-6">
-      <h3 ng-show="incomes.length">
+      <h3 class="fade-in" ng-show="incomes.length">
         Last incomes:
       </h3>
       <ul class="list-group">
-        <li class="list-group-item income" ng-repeat="income in incomes">
+        <li class="list-group-item income fade-in" ng-repeat="income in incomes">
           {{ income.value | currency : "₴" }} {{ income.comment != null ? "| " + income.comment : "" }} {{ "| " + (income.income_time | date) }}<a class="pull-right" ng-click="removeIncome(income.id)"><i class="fa fa-close" style="cursor: pointer;color:#fff"></i></a>
         </li>
       </ul>
@@ -35,14 +35,14 @@
 <div class="row">
   <div class="col-md-12">
     <div class="col-md-12">
-      <h3>
+      <h3 ng-show="transactions.category.transactions.length">
         Last transactions:
       </h3>
       <ul class="list-group" ng-repeat="category in transactions">
         <h4 ng-show="category.transactions.length">
           {{category.category}}
         </h4>
-        <li class="list-group-item outgo" ng-repeat="transaction in category.transactions">
+        <li class="list-group-item outgo fade-in" ng-repeat="transaction in category.transactions">
           {{ transaction.summ | currency : "₴" }} {{ transaction.comment != null ? "| " + transaction.comment : "" }} {{ "| " + (transaction.transaction_time | date) }}<a class="pull-right" ng-click="removeTransaction(transaction.id)"><i class="fa fa-close" style="cursor: pointer;color:#fff"></i></a>
         </li>
       </ul>

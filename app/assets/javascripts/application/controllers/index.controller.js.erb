@@ -11,6 +11,7 @@
         balances.getBalance()
           .success(function(data) {
             $scope.balance = data.balance;
+            $scope.account = data.account;
           })
       };
       getBalance();
