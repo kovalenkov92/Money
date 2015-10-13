@@ -1,15 +1,16 @@
 .row
   .col-md-12
-    h2 style="color:green"
+    h2 style="color:#fff"
       | Balance: {{balance.value | currency : "₴" }}
     .col-md-6
       h3 Outgo:
       select.form-control placeholder="Category" ng-model="selected_category" ng-options="category.name for category in categories track by category.id"
         option value="" disabled=true selected=true Category
       a.pull-right ng-click="addCategory()"
-        i.fa.fa-plus style="cursor: pointer"
+        i.fa.fa-plus style="cursor: pointer;color:#fff"
       small.error ng-show="transaction_errors.category_id" You have to chose category. &nbsp;
       small.error ng-show="transaction_errors.summ" Summ is required, should be greater than 0
+      br
       br
       p.input-group
         input type="text" class="form-control" placeholder="Transaction time" datepicker-popup="dd-MMMM-yyyy" ng-model="transaction_time" is-open="from_opened" close-text="Close"
@@ -29,7 +30,7 @@
         li.list-group-item.income ng-repeat="income in incomes"
           | {{ income.value | currency : "₴" }} {{ income.comment != null ? "| " + income.comment : "" }} {{ "| " + (income.income_time | date) }}
           a.pull-right ng-click="removeIncome(income.id)"
-            i.fa.fa-close style="cursor: pointer"
+            i.fa.fa-close style="cursor: pointer;color:#fff"
       button.btn.btn-default type="submit" ng-click="fixIncome()"
         | New income
 .row
@@ -42,4 +43,4 @@
         li.list-group-item.outgo ng-repeat="transaction in category.transactions"
           | {{ transaction.summ | currency : "₴" }} {{ transaction.comment != null ? "| " + transaction.comment : "" }} {{ "| " + (transaction.transaction_time | date) }}
           a.pull-right ng-click="removeTransaction(transaction.id)"
-            i.fa.fa-close style="cursor: pointer"
+            i.fa.fa-close style="cursor: pointer;color:#fff"

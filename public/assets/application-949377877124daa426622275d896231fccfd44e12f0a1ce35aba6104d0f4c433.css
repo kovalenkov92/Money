@@ -12552,26 +12552,35 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
 }
 
 /* line 9, /home/user/dev/Money/app/assets/stylesheets/application.css.sass */
+body {
+  overflow-x: hidden;
+  background: linear-gradient(rgba(0, 0, 102, 0.65), rgba(0, 0, 102, 0.65)), url(images/Dollars.jpg);
+  color: #fff;
+}
+
+/* line 14, /home/user/dev/Money/app/assets/stylesheets/application.css.sass */
 .container {
   width: 90%;
 }
 
-/* line 11, /home/user/dev/Money/app/assets/stylesheets/application.css.sass */
+/* line 16, /home/user/dev/Money/app/assets/stylesheets/application.css.sass */
 .error {
-  color: red;
+  color: #b80000;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 0.5em;
 }
 
-/* line 13, /home/user/dev/Money/app/assets/stylesheets/application.css.sass */
+/* line 20, /home/user/dev/Money/app/assets/stylesheets/application.css.sass */
 .valid {
   background: red;
 }
 
-/* line 15, /home/user/dev/Money/app/assets/stylesheets/application.css.sass */
+/* line 22, /home/user/dev/Money/app/assets/stylesheets/application.css.sass */
 .income {
-  background: rgba(0, 204, 0, 0.4);
+  background: rgba(0, 204, 0, 0.7);
 }
 
-/* line 17, /home/user/dev/Money/app/assets/stylesheets/application.css.sass */
+/* line 24, /home/user/dev/Money/app/assets/stylesheets/application.css.sass */
 .outgo {
-  background: rgba(255, 102, 0, 0.4);
+  background: rgba(255, 102, 0, 0.7);
 }

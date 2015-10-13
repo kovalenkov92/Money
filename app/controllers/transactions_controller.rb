@@ -14,11 +14,6 @@ class TransactionsController < ApplicationController
     render json: {transactions: transactions}
   end
 
-  def show
-    transaction = Transaction.find params[:id]
-    render json: {transaction: transaction}
-  end
-
   def create
     transaction = Transaction.create  summ: params[:transaction][:summ],
                                       comment: params[:transaction][:comment],

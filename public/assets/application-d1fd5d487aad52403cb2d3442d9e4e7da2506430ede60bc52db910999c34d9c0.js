@@ -65654,17 +65654,17 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
     $stateProvider
       .state('root', {
         url: '/',
-        templateUrl: "/assets/application/templates/index-183bc1a29965ed2ea18fca61b529206698708bc850afe4b10b40d464f16cd744.html",
+        templateUrl: "/assets/application/templates/index-b7013cc0fee78b1fa145f884c6c8ec9d9756268ef038a2284bc9ea5b365d266a.html",
         controller: "IndexCtrl"
       })
       .state('chart', {
         url: '/chart',
-        templateUrl: "/assets/application/templates/chart-15e17b18a0a23f43140fc65848ccd0ad1b20f1eba2b9642b5488d8874e639bbf.html",
+        templateUrl: "/assets/application/templates/chart-3e67d9a5adeeaaf82e73b3150f12ad4e8f42ba59467ed1f420368422f373cf68.html",
         controller: 'ChartCtrl'
       })
       .state('t-management', {
         url: '/t_management',
-        templateUrl: "/assets/application/templates/transactions-management-0ab9d71c081baca5aaac26f62773fbb0fbf476923f3876e8c075a65e774864c8.html",
+        templateUrl: "/assets/application/templates/transactions-management-ce429a252b1303264d787685b93f7280fd2a0ce52ffaa6c7d822c3989a01ee50.html",
         controller: "ManagementCtrl"
       })
   }]);
@@ -65780,7 +65780,7 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
       $scope.addCategory = function() {
           var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: "/assets/application/templates/modals/new-category-modal-01264e2bb48e2e4e954817b19a0f43e220f3a76e5d1ff17adff27e821b5de667.html",
+            templateUrl: "/assets/application/templates/modals/new-category-modal-c9f88c0e2635ef949b91e33daed454aa8fef6e2a24b993121a4db2179425c82f.html",
             controller: ['$scope', '$http', '$modalInstance', function($scope, $http, $modalInstance) {
 
                 $scope.ok = function (name) {
@@ -65836,7 +65836,7 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
       $scope.fixIncome = function() {
         var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: "/assets/application/templates/modals/confirm-income-dialog-5df381dbbe15d746380a74a4f13f8f5ba2c894fffd5d6ef1dc2d6f04c1f75f08.html",
+            templateUrl: "/assets/application/templates/modals/confirm-income-dialog-5d4d4efce1a9c1542825396108b9b4f09ceef3b6d04275a1c0f76454874ea780.html",
             controller: ['$scope', '$http', '$modalInstance', function($scope, $http, $modalInstance) {
                 $scope.income_time = new Date();
                 $scope.ok = function (value, comment, time) {
@@ -65862,7 +65862,7 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
       $scope.removeTransaction = function(id) {
         var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: "/assets/application/templates/modals/confirm-dialog-04a853179b73db6e90579bbc39c8aad7eec5e724059ed9c7f106262d25d580d7.html",
+            templateUrl: "/assets/application/templates/modals/confirm-dialog-ec59374460e7f542485596dba0096a3eb419aa9c74d82c88ac39d30efac90048.html",
             controller: ['$scope', '$http', '$modalInstance', function($scope, $http, $modalInstance) {
 
                 $scope.ok = function () {
@@ -65888,7 +65888,7 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
       $scope.removeIncome = function(id) {
         var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: "/assets/application/templates/modals/confirm-dialog-04a853179b73db6e90579bbc39c8aad7eec5e724059ed9c7f106262d25d580d7.html",
+            templateUrl: "/assets/application/templates/modals/confirm-dialog-ec59374460e7f542485596dba0096a3eb419aa9c74d82c88ac39d30efac90048.html",
             controller: ['$scope', '$http', '$modalInstance', function($scope, $http, $modalInstance) {
 
                 $scope.ok = function () {

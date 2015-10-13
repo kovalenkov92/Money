@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12">
-    <h2 style="color:green">
+    <h2 style="color:#fff">
       Balance: {{balance.value | currency : "₴" }}
     </h2>
     <div class="col-md-6">
@@ -11,7 +11,7 @@
         <option disabled="" selected="" value="">
           Category
         </option>
-      </select><a class="pull-right" ng-click="addCategory()"><i class="fa fa-plus" style="cursor: pointer"></i></a><small class="error" ng-show="transaction_errors.category_id">You have to chose category. &nbsp;</small><small class="error" ng-show="transaction_errors.summ">Summ is required, should be greater than 0</small><br />
+      </select><a class="pull-right" ng-click="addCategory()"><i class="fa fa-plus" style="cursor: pointer;color:#fff"></i></a><small class="error" ng-show="transaction_errors.category_id">You have to chose category. &nbsp;</small><small class="error" ng-show="transaction_errors.summ">Summ is required, should be greater than 0</small><br /><br />
       <p class="input-group">
         <input class="form-control" close-text="Close" datepicker-popup="dd-MMMM-yyyy" is-open="from_opened" ng-model="transaction_time" placeholder="Transaction time" type="text" /><span class="input-group-btn"><button class="btn btn-default" ng-click="from_opened = true" type="button"><i class="glyphicon glyphicon-calendar"></i></button></span>
       </p>
@@ -25,7 +25,7 @@
       </h3>
       <ul class="list-group">
         <li class="list-group-item income" ng-repeat="income in incomes">
-          {{ income.value | currency : "₴" }} {{ income.comment != null ? "| " + income.comment : "" }} {{ "| " + (income.income_time | date) }}<a class="pull-right" ng-click="removeIncome(income.id)"><i class="fa fa-close" style="cursor: pointer"></i></a>
+          {{ income.value | currency : "₴" }} {{ income.comment != null ? "| " + income.comment : "" }} {{ "| " + (income.income_time | date) }}<a class="pull-right" ng-click="removeIncome(income.id)"><i class="fa fa-close" style="cursor: pointer;color:#fff"></i></a>
         </li>
       </ul>
       <button class="btn btn-default" ng-click="fixIncome()" type="submit">New income</button>
@@ -43,7 +43,7 @@
           {{category.category}}
         </h4>
         <li class="list-group-item outgo" ng-repeat="transaction in category.transactions">
-          {{ transaction.summ | currency : "₴" }} {{ transaction.comment != null ? "| " + transaction.comment : "" }} {{ "| " + (transaction.transaction_time | date) }}<a class="pull-right" ng-click="removeTransaction(transaction.id)"><i class="fa fa-close" style="cursor: pointer"></i></a>
+          {{ transaction.summ | currency : "₴" }} {{ transaction.comment != null ? "| " + transaction.comment : "" }} {{ "| " + (transaction.transaction_time | date) }}<a class="pull-right" ng-click="removeTransaction(transaction.id)"><i class="fa fa-close" style="cursor: pointer;color:#fff"></i></a>
         </li>
       </ul>
     </div>

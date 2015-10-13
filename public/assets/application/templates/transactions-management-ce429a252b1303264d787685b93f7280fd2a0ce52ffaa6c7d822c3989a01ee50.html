@@ -20,7 +20,7 @@
       <h4 ng-show="category.transactions.length">
         {{category.category}}
       </h4>
-      <li class="list-group-item" ng-repeat="transaction in category.transactions">
+      <li class="list-group-item outgo" ng-repeat="transaction in category.transactions">
         {{ transaction.summ | currency : "₴" }} {{ transaction.comment != null ? "| " + transaction.comment : "" }} {{ "| " + (transaction.transaction_time | date) }}
       </li>
     </ul>

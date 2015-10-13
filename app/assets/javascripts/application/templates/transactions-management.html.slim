@@ -18,5 +18,5 @@
     ul.list-group ng-repeat="category in transactions"
       h4 ng-show="category.transactions.length"
         | {{category.category}}
-      li.list-group-item ng-repeat="transaction in category.transactions"
+      li.list-group-item.outgo ng-repeat="transaction in category.transactions"
         | {{ transaction.summ | currency : "₴" }} {{ transaction.comment != null ? "| " + transaction.comment : "" }} {{ "| " + (transaction.transaction_time | date) }}
