@@ -16,13 +16,13 @@
   .col-md-3
     br
     button.btn.btn-default ng-disabled="!fromDate || !toDate" ng-click="getGraph(fromDate, toDate)" Draw graph
-.row
-  .error style="text-align:center" ng-hide="graphData.length || hideError" There were no transactions in given period
-  .col-md-7 ng-show="graphData.length"
-    br
-    #chart.fade-in style="height:400px"
-  .col-md-5 ng-show="graphData.length"  
-    br
-    ul.list-group
-      li.list-group-item.outgo.fade-in ng-repeat="data in graphData"
-        | {{data.name}} -- {{data.y | currency : "₴"}}
+  .col-md-12
+    .error style="text-align:center" ng-hide="graphData.length || hideError" There were no transactions in given period
+    .col-md-7 ng-show="graphData.length"
+      br
+      #chart.fade-in style="height:400px"
+    .col-md-5 ng-show="graphData.length"  
+      br
+      ul.list-group
+        li.list-group-item.outgo.fade-in ng-repeat="data in graphData"
+          | {{data.name}} -- {{data.y | currency : "₴"}}

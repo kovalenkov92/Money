@@ -14,21 +14,21 @@
   <div class="col-md-3">
     <br /><button class="btn btn-default" ng-click="getGraph(fromDate, toDate)" ng-disabled="!fromDate || !toDate">Draw graph</button>
   </div>
-</div>
-<div class="row">
-  <div class="error" ng-hide="graphData.length || hideError" style="text-align:center">
-    There were no transactions in given period
-  </div>
-  <div class="col-md-7" ng-show="graphData.length">
-    <br />
-    <div class="fade-in" id="chart" style="height:400px"></div>
-  </div>
-  <div class="col-md-5" ng-show="graphData.length">
-    <br />
-    <ul class="list-group">
-      <li class="list-group-item outgo fade-in" ng-repeat="data in graphData">
-        {{data.name}} -- {{data.y | currency : "₴"}}
-      </li>
-    </ul>
+  <div class="col-md-12">
+    <div class="error" ng-hide="graphData.length || hideError" style="text-align:center">
+      There were no transactions in given period
+    </div>
+    <div class="col-md-7" ng-show="graphData.length">
+      <br />
+      <div class="fade-in" id="chart" style="height:400px"></div>
+    </div>
+    <div class="col-md-5" ng-show="graphData.length">
+      <br />
+      <ul class="list-group">
+        <li class="list-group-item outgo fade-in" ng-repeat="data in graphData">
+          {{data.name}} -- {{data.y | currency : "₴"}}
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

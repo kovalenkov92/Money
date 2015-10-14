@@ -65654,12 +65654,12 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
     $stateProvider
       .state('root', {
         url: '/',
-        templateUrl: "/assets/application/templates/index-c9d533ddd54afb603c3ae71ed902391d73bee127066d59dc628edbb621b578e9.html",
+        templateUrl: "/assets/application/templates/index-53c41f63121feb50da1ecc1fa893b5197b8fff304a93ce4a03833ef07bbd2445.html",
         controller: "IndexCtrl"
       })
       .state('chart', {
         url: '/chart',
-        templateUrl: "/assets/application/templates/chart-8caa87b5ab7a6946bd98d06967b54fa7f0e7fbd9b3ccb4e3beb5d48671357433.html",
+        templateUrl: "/assets/application/templates/chart-6185fcb01806fd461eb7cdcad849e577b653c0cdda804eb87bb4952852f4f6b2.html",
         controller: 'ChartCtrl'
       })
       .state('t-management', {
@@ -65672,74 +65672,76 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
 }());
 (function () {
 
-    "use strict";
+  "use strict";
 
-    angular.module('main').controller('ChartCtrl', [ '$scope', '$state', 'TransactionsFactory',
-      function($scope, $state, transactions) {
-        $scope.hideError = true;
-        $scope.getGraph = function(fromDate, toDate){
-          transactions.getGraphData(fromDate, toDate)
-            .success(function(data){
-              $scope.graphData = data.response;
-              $scope.hideError = false;
-              drawGraph(data.response);
-            })
-            .error(function(data){
-              console.log(data);
-            })
-        };
+  angular.module('main').controller('ChartCtrl', [ '$scope', '$state', 'TransactionsFactory',
+    function($scope, $state, transactions) {
+    $scope.hideError = true;
+    $scope.getGraph = function(fromDate, toDate){
+      transactions.getGraphData(fromDate, toDate)
+      .success(function(data){
+        $scope.graphData = data.response;
+        $scope.hideError = false;
+        drawGraph(data.response);
+      })
+      .error(function(data){
+        console.log(data);
+      })
+    };
 
-        var drawGraph = function(data){
+    var drawGraph = function(data){
 
-          $(function () {
-            $('#chart').highcharts({
-                chart: {
-                    type: 'pie',
-                    options3d: {
-                        enabled: false,
-                        alpha: 45,
-                        beta: 0
-                    }
-                },
-                title: {
-                    text: '',
-                    align: 'left',
-                    verticalAlign: 'bottom',
-                    y: 0
-                },
-                tooltip: {
-                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                },
-                plotOptions: {
-                    pie: {
-                        allowPointSelect: true,
-                        cursor: 'pointer',
-                        depth: 20,
-                        dataLabels: {
-                            enabled: true,
-                            distance: -50,
-                            style: {
-                                fontWeight: 'bold',
-                                color: 'white',
-                                textShadow: '0px 1px 2px black'
-                            }
-                        },
-                        startAngle: -90,
-                        endAngle: 270,
-                        center: ['50%', '50%']
-                    }
-                },
-                series: [{
-                    type: 'pie',
-                    name: 'Outgoes',
-                    innerSize: '0%',
-                    data: data
-                }]
-            });
-          });
-        };
+      $(function () {
+      $('#chart').highcharts({
+        chart: {
+          type: 'pie',
+          options3d: {
+            enabled: false,
+            alpha: 45,
+            beta: 0
+          }
+        },
+        title: {
+          text: '',
+          align: 'left',
+          verticalAlign: 'bottom',
+          y: 0
+        },
+        tooltip: {
+          pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+          pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            depth: 20,
+            dataLabels: {
+              enabled: true,
+              distance: -50,
+              style: {
+                fontWeight: 'bold',
+                color: 'white',
+                textShadow: '0px 1px 2px black'
+              }
+            },
+            startAngle: -90,
+            endAngle: 270,
+            center: ['50%', '50%']
+          }
+        },
+        series: [{
+          type: 'pie',
+          name: 'Outgoes',
+          innerSize: '0%',
+          data: data
+        }]
+      });
 
-      }])
+      
+      });
+    };
+
+    }])
 }());
 (function () {
 
