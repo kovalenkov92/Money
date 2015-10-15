@@ -86,7 +86,6 @@ class TransactionsController < ApplicationController
       date = (from.to_i.to_s + "000").to_i
       expenses << [date,summ_per_day]
     end
-    puts expenses
     render json: {response: expenses}
   end
 
@@ -105,6 +104,19 @@ class TransactionsController < ApplicationController
       transactions << {category: c.name, transactions: t.limit(10)} unless t === []
     end
 
+    render json: {transactions: transactions}
+  end
+
+  def search_by_date
+    balance = current_account.balance
+    categories = balance.categories.order(:name)
+
+    transactions = []
+
+    categories.each do |c|
+      t = c.transactions.where(transaction_time: params[:date].to_date)
+      transactions << {category: c.name, transactions: t.limit(10)} unless t === []
+    end
     render json: {transactions: transactions}
   end
 

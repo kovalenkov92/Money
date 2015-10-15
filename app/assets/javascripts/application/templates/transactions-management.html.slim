@@ -1,22 +1,30 @@
 .row.fade-in
-  .col-md-12
-    h3 Search for transactions:
-    form.col-md-6 name="queryForm"
-      span By comment or value:
-      input.form-control type="text" name="query" ng-model="query" required=true
-      br
+  h3.white Search for transactions:
+  .col-md-6
+    form name="queryForm"
+      p
+        input.form-control placeholder="By comment or value:" type="text" name="query" ng-model="query" required=true
       button.btn.btn-default type="submit" ng-disabled="queryForm.query.$invalid" ng-click="search(query)" Search
-    / form.col-md-6
-    /   span Or by date:
-    /   input.form-control type="text" ng-model="dateQuery"
-    /   br
-    /   button.btn.btn-default type="submit" ng-click="search" Search
-.row
-  .col-md-12
-    h3.error.fade-in ng-show="!transactions.length && transactions" Transactions wasnt found
-    h3 ng-show="transactions.length" Transactions found: 
-    ul.list-group ng-repeat="category in transactions"
-      h4 ng-show="category.transactions.length"
+    h3.error.fade-in ng-show="!by_query.length && by_query" Transactions wasnt found
+    h3.white ng-show="by_query.length" Transactions found: 
+    ul.list-group.white ng-repeat="category in by_query"
+      h4.white ng-show="category.transactions.length"
         | {{category.category}}
-      li.list-group-item.outgo.fade-in ng-repeat="transaction in category.transactions"
+      li.list-group-item.outgo.white.fade-in ng-repeat="transaction in category.transactions"
+        | {{ transaction.summ | currency : "₴" }} {{ transaction.comment != null ? "| " + transaction.comment : "" }} {{ "| " + (transaction.transaction_time | date) }}
+    br
+  .col-md-6
+    form name="dateForm"
+      p.input-group
+        input type="text" class="form-control" name="dateQuery" placeholder="Or by date:" datepicker-popup="dd-MMMM-yyyy" ng-model="date" is-open="from_opened" close-text="Close" required=true
+        span.input-group-btn
+          button type="button" class="btn btn-default" ng-click="from_opened = true"
+            i.glyphicon.glyphicon-calendar
+      button.btn.btn-default type="submit" ng-disabled="dateForm.dateQuery.$invalid" ng-click="searchByDate(date)" Search
+    h3.error.fade-in ng-show="!by_date.length && by_date" Transactions wasnt found
+    h3.white ng-show="by_date.length" Transactions found: 
+    ul.list-group.white ng-repeat="category in by_date"
+      h4.white ng-show="category.transactions.length"
+        | {{category.category}}
+      li.list-group-item.outgo.white.fade-in ng-repeat="transaction in category.transactions"
         | {{ transaction.summ | currency : "₴" }} {{ transaction.comment != null ? "| " + transaction.comment : "" }} {{ "| " + (transaction.transaction_time | date) }}

@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       get :generate_graph
       get :generate_area_data
       get :search
+      get :search_by_date
     end
   end
 

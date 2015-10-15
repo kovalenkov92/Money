@@ -17,7 +17,6 @@
       };
 
       var drawGraph = function(data){
-        console.log('(' + data + ')');
         $('#area').highcharts({
             chart: {
                 zoomType: 'x'

@@ -1,9 +1,9 @@
 .row.fade-in
   .col-md-12
-    h2
+    h2.white
       | Balance: {{balance.value | currency : "₴" }}
     .col-md-6
-      h3 Outgo:
+      h3.white Outgo:
       select.form-control placeholder="Category" ng-model="selected_category" ng-options="category.name for category in categories track by category.id"
         option value="" disabled=true selected=true Category
       a.pull-right ng-click="addCategory()"
@@ -25,9 +25,9 @@
         button.btn.btn-default type="submit" ng-click="fixOutgo(outgoValue, selected_category, outgoComment, transaction_time)"
           | Fix outgo
     .col-md-6
-      h3.fade-in ng-show="incomes.length" Last incomes:
+      h3.white.fade-in ng-show="incomes.length" Last incomes:
       ul.list-group
-        li.list-group-item.income.fade-in ng-repeat="income in incomes"
+        li.list-group-item.income.fade-in.white ng-repeat="income in incomes"
           | {{ income.value | currency : "₴" }} {{ income.comment != null ? "| " + income.comment : "" }} {{ "| " + (income.income_time | date) }}
           a.pull-right ng-click="removeIncome(income.id)"
             i.fa.fa-close style="cursor: pointer;color:#fff"
@@ -36,10 +36,10 @@
   .col-md-12
     .col-md-12
       h3 ng-show="transactions.category.transactions.length" Last transactions:
-      ul.list-group ng-repeat="category in transactions"
+      ul.list-group.white ng-repeat="category in transactions"
         h4 ng-show="category.transactions.length"
           | {{category.category}}
-        li.list-group-item.outgo.fade-in ng-repeat="transaction in category.transactions"
+        li.list-group-item.outgo.fade-in.white ng-repeat="transaction in category.transactions"
           | {{ transaction.summ | currency : "₴" }} {{ transaction.comment != null ? "| " + transaction.comment : "" }} {{ "| " + (transaction.transaction_time | date) }}
           a.pull-right ng-click="removeTransaction(transaction.id)"
             i.fa.fa-close style="cursor: pointer;color:#fff"

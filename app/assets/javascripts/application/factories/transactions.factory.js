@@ -32,6 +32,9 @@
           query = "";
         };
         return $http.get('/transactions/search?query=' + query);
+      },
+      startSearchByDate: function(date) {
+        return $http.get('/transactions/search_by_date?date=' + date);
       }
     };
   }])

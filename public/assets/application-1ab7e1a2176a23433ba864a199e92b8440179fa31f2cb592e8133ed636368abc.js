@@ -65654,17 +65654,17 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
     $stateProvider
       .state('root', {
         url: '/',
-        templateUrl: "/assets/application/templates/index-53c41f63121feb50da1ecc1fa893b5197b8fff304a93ce4a03833ef07bbd2445.html",
+        templateUrl: "/assets/application/templates/index-cc23d9515d22d9f32fa753480d2501a17d54921572cae4a1de8463f6ed8f1ebe.html",
         controller: "IndexCtrl"
       })
       .state('chart', {
         url: '/chart',
-        templateUrl: "/assets/application/templates/chart-6185fcb01806fd461eb7cdcad849e577b653c0cdda804eb87bb4952852f4f6b2.html",
+        templateUrl: "/assets/application/templates/chart-d2a2af311df8722f324c352a900ed4d60978cf79de11ac63914137e660741423.html",
         controller: 'ChartCtrl'
       })
       .state('t-management', {
         url: '/t_management',
-        templateUrl: "/assets/application/templates/transactions-management-80341f0e0e40b060ac3d46ad11702c62cc354ee5fde70d9bcb702c38d36f0ed0.html",
+        templateUrl: "/assets/application/templates/transactions-management-d03ccc68009ce38d6798abd62916e3908c50db647087346001876efb71671628.html",
         controller: "ManagementCtrl"
       })
       .state('area-graph', {
@@ -65694,7 +65694,6 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
       };
 
       var drawGraph = function(data){
-        console.log('(' + data + ')');
         $('#area').highcharts({
             chart: {
                 zoomType: 'x'
@@ -66019,7 +66018,17 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
           $scope.search = function(query) {
             transactions.startSearch(query)
               .success(function(data) {
-                $scope.transactions = data.transactions;
+                $scope.by_query = data.transactions;
+              })
+              .error(function(data) {
+                console.log(data);
+              })
+          };
+
+          $scope.searchByDate = function(date) {
+            transactions.startSearchByDate(date)
+              .success(function(data) {
+                $scope.by_date = data.transactions;
               })
               .error(function(data) {
                 console.log(data);
@@ -66107,6 +66116,9 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
           query = "";
         };
         return $http.get('/transactions/search?query=' + query);
+      },
+      startSearchByDate: function(date) {
+        return $http.get('/transactions/search_by_date?date=' + date);
       }
     };
   }])

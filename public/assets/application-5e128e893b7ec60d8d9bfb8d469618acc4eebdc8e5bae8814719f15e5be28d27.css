@@ -12076,53 +12076,57 @@ button.close {
 body {
   overflow-x: hidden;
   background: linear-gradient(rgba(0, 0, 102, 0.65), rgba(0, 0, 102, 0.65)), url(images/Dollars.jpg);
-  color: #fff;
 }
 
-/* line 13, /home/oem/dev/money/app/assets/stylesheets/application.css.sass */
+/* line 12, /home/oem/dev/money/app/assets/stylesheets/application.css.sass */
 .container {
   width: 90%;
 }
 
-/* line 15, /home/oem/dev/money/app/assets/stylesheets/application.css.sass */
+/* line 14, /home/oem/dev/money/app/assets/stylesheets/application.css.sass */
 .error {
   color: #b80000;
   background: rgba(255, 255, 255, 0.5);
   padding: 0.5em;
 }
 
-/* line 19, /home/oem/dev/money/app/assets/stylesheets/application.css.sass */
+/* line 18, /home/oem/dev/money/app/assets/stylesheets/application.css.sass */
 .valid {
   background: red;
 }
 
-/* line 21, /home/oem/dev/money/app/assets/stylesheets/application.css.sass */
+/* line 20, /home/oem/dev/money/app/assets/stylesheets/application.css.sass */
 .income {
   background: rgba(0, 204, 0, 0.7);
 }
 
-/* line 23, /home/oem/dev/money/app/assets/stylesheets/application.css.sass */
+/* line 22, /home/oem/dev/money/app/assets/stylesheets/application.css.sass */
 .outgo {
   background: rgba(255, 102, 0, 0.7);
 }
 
-/* line 25, /home/oem/dev/money/app/assets/stylesheets/application.css.sass */
+/* line 24, /home/oem/dev/money/app/assets/stylesheets/application.css.sass */
 .list-group-item {
   border-radius: 0;
   border: none;
 }
 
-/* line 28, /home/oem/dev/money/app/assets/stylesheets/application.css.sass */
+/* line 27, /home/oem/dev/money/app/assets/stylesheets/application.css.sass */
 .list-group-item:last-child, .list-group-item:first-child {
   border-radius: 0;
 }
 
-/* line 30, /home/oem/dev/money/app/assets/stylesheets/application.css.sass */
+/* line 29, /home/oem/dev/money/app/assets/stylesheets/application.css.sass */
 .form-control {
   border-radius: 0;
 }
 
-/* line 34, /home/oem/dev/money/app/assets/stylesheets/application.css.sass */
+/* line 31, /home/oem/dev/money/app/assets/stylesheets/application.css.sass */
+.white {
+  color: #fff;
+}
+
+/* line 35, /home/oem/dev/money/app/assets/stylesheets/application.css.sass */
 .btn {
   border-radius: 0;
   border: none;
