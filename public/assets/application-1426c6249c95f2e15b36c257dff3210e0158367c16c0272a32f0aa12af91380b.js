@@ -65659,7 +65659,7 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
       })
       .state('chart', {
         url: '/chart',
-        templateUrl: "/assets/application/templates/chart-d2a2af311df8722f324c352a900ed4d60978cf79de11ac63914137e660741423.html",
+        templateUrl: "/assets/application/templates/chart-e9f2713d781ac925f51d8316c212e619db23f47a915ef6650ea85229c997167f.html",
         controller: 'ChartCtrl'
       })
       .state('t-management', {
@@ -65669,7 +65669,7 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
       })
       .state('area-graph', {
         url: '/area_graph',
-        templateUrl: "/assets/application/templates/area-graph-6341d3fe6f03536e2e97c8a3e771908026395a161c015a12568e7dcccf9c1762.html",
+        templateUrl: "/assets/application/templates/area-graph-b9f523fe427fc2a3a2e3299b36baa06cd0757270fbd33722a5ac461d795c3ae7.html",
         controller: "AreaGraphCtrl"
       })
   }]);
@@ -65717,7 +65717,7 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
                 enabled: false
             },
             plotOptions: {
-                area: {
+                areaspline: {
                     fillColor: {
                         linearGradient: {
                             x1: 0,
@@ -65744,7 +65744,7 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
             },
 
             series: [{
-                type: 'area',
+                type: 'areaspline',
                 name: 'expense',
                 data: data
             }]

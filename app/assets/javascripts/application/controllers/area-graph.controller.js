@@ -40,7 +40,7 @@
                 enabled: false
             },
             plotOptions: {
-                area: {
+                areaspline: {
                     fillColor: {
                         linearGradient: {
                             x1: 0,
@@ -67,7 +67,7 @@
             },
 
             series: [{
-                type: 'area',
+                type: 'areaspline',
                 name: 'expense',
                 data: data
             }]
