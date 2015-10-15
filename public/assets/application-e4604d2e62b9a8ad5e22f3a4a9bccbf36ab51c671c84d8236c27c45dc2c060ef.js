@@ -65664,11 +65664,94 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
       })
       .state('t-management', {
         url: '/t_management',
-        templateUrl: "/assets/application/templates/transactions-management-3fa35957a681aae2e54fe502390902d5d6b749a2d0091740bf5be608de5be079.html",
+        templateUrl: "/assets/application/templates/transactions-management-80341f0e0e40b060ac3d46ad11702c62cc354ee5fde70d9bcb702c38d36f0ed0.html",
         controller: "ManagementCtrl"
+      })
+      .state('area-graph', {
+        url: '/area_graph',
+        templateUrl: "/assets/application/templates/area-graph-6341d3fe6f03536e2e97c8a3e771908026395a161c015a12568e7dcccf9c1762.html",
+        controller: "AreaGraphCtrl"
       })
   }]);
 
+}());
+(function () {
+
+  "use strict";
+
+  angular.module('main').controller('AreaGraphCtrl', [ '$scope', '$state', 'TransactionsFactory',
+    function($scope, $state, transactions) {
+      $scope.hideError = true;
+      $scope.getGraph = function(fromDate, toDate){
+        transactions.getAreaData(fromDate, toDate)
+        .success(function(data){
+          $scope.hideError = true;
+          drawGraph(data.response);
+        })
+        .error(function(data){
+          $scope.hideError = false;
+        })
+      };
+
+      var drawGraph = function(data){
+        console.log('(' + data + ')');
+        $('#area').highcharts({
+            chart: {
+                zoomType: 'x'
+            },
+            title: {
+                text: 'Expenses'
+            },
+            subtitle: {
+                text: document.ontouchstart === undefined ?
+                        'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+            },
+            xAxis: {
+                type: 'datetime'
+            },
+            yAxis: {
+                title: {
+                    text: "Value, ₴"
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            plotOptions: {
+                area: {
+                    fillColor: {
+                        linearGradient: {
+                            x1: 0,
+                            y1: 0,
+                            x2: 0,
+                            y2: 1
+                        },
+                        stops: [
+                            [0, Highcharts.getOptions().colors[0]],
+                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                        ]
+                    },
+                    marker: {
+                        radius: 2
+                    },
+                    lineWidth: 1,
+                    states: {
+                        hover: {
+                            lineWidth: 1
+                        }
+                    },
+                    threshold: null
+                }
+            },
+
+            series: [{
+                type: 'area',
+                name: 'expense',
+                data: data
+            }]
+        });  
+      };
+    }])
 }());
 (function () {
 
@@ -66015,6 +66098,9 @@ e.onclick=null,p(e)}});H.menu=function(b,a,e,c){return["M",b,a+2.5,"L",b+e,a+2.5
       },
       getGraphData: function(from, to) {
         return $http.get('/transactions/generate_graph?from=' + from + '&to=' + to);
+      },
+      getAreaData: function(from, to) {
+        return $http.get('transactions/generate_area_data?from=' + from + '&to=' + to);
       },
       startSearch: function(query) {
         if (query === undefined) {

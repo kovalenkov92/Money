@@ -66,6 +66,30 @@ class TransactionsController < ApplicationController
     render json: {response: response}
   end
 
+  def generate_area_data
+    balance = current_account.balance
+    categories = balance.categories
+    from = params[:from].to_date.beginning_of_day.to_datetime
+    to = params[:to].to_date.end_of_day.to_datetime
+
+    expenses = []
+    while (from < to) do
+      from += 1.day
+      range = (from.to_date.beginning_of_day..from.to_date.end_of_day)
+      summ_per_day = []
+      categories.each do |c|
+        transactions = c.transactions.select{|t| range.cover?(t.transaction_time)}
+        summ = transactions.map(&:summ).inject(0){ |result, elem| result + elem }
+        summ_per_day << summ
+      end
+      summ_per_day = summ_per_day.inject(0){ |result, elem| result + elem }
+      date = (from.to_i.to_s + "000").to_i
+      expenses << [date,summ_per_day]
+    end
+    puts expenses
+    render json: {response: expenses}
+  end
+
   def search
     balance = current_account.balance
     categories = balance.categories.order(:name)

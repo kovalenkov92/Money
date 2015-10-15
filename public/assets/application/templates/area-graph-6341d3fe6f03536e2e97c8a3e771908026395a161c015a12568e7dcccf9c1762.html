@@ -1,0 +1,26 @@
+<div class="row fade-in">
+  <div class="col-md-3">
+    From Date:
+    <p class="input-group">
+      <input class="form-control" close-text="Close" date-disabled="disabled(date, mode)" datepicker-options="dateOptions" datepicker-popup="{{format}}" is-open="from_opened" max-date="maxDate" ng-model="fromDate" ng-required="true" type="text" /><span class="input-group-btn"><button class="btn btn-default" ng-click="from_opened = true" type="button"><i class="glyphicon glyphicon-calendar"></i></button></span>
+    </p>
+  </div>
+  <div class="col-md-3">
+    To Date:
+    <p class="input-group">
+      <input class="form-control" close-text="Close" date-disabled="disabled(date, mode)" datepicker-options="dateOptions" datepicker-popup="{{format}}" is-open="to_opened" max-date="maxDate" min-date="fromDate" ng-model="toDate" ng-required="true" type="text" /><span class="input-group-btn"><button class="btn btn-default" ng-click="to_opened = true" type="button"><i class="glyphicon glyphicon-calendar"></i></button></span>
+    </p>
+  </div>
+  <div class="col-md-3">
+    <br /><button class="btn btn-default" ng-click="getGraph(fromDate, toDate)" ng-disabled="!fromDate || !toDate">Draw graph</button>
+  </div>
+  <div class="col-md-12">
+    <div class="error" ng-hide="hideError" style="text-align:center">
+      There were no transactions in given period
+    </div>
+    <div class="col-md-12">
+      <br />
+      <div class="fade-in" id="area"></div>
+    </div>
+  </div>
+</div>

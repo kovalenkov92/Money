@@ -24,6 +24,9 @@
       getGraphData: function(from, to) {
         return $http.get('/transactions/generate_graph?from=' + from + '&to=' + to);
       },
+      getAreaData: function(from, to) {
+        return $http.get('transactions/generate_area_data?from=' + from + '&to=' + to);
+      },
       startSearch: function(query) {
         if (query === undefined) {
           query = "";

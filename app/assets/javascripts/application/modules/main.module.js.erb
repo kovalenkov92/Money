@@ -32,6 +32,11 @@
         templateUrl: "<%= asset_path('application/templates/transactions-management.html') %>",
         controller: "ManagementCtrl"
       })
+      .state('area-graph', {
+        url: '/area_graph',
+        templateUrl: "<%= asset_path('application/templates/area-graph.html') %>",
+        controller: "AreaGraphCtrl"
+      })
   }]);
 
 }());

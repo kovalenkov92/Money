@@ -13,8 +13,8 @@
     /   button.btn.btn-default type="submit" ng-click="search" Search
 .row
   .col-md-12
-    h3.error.fade-in ng-show="!transactions.length && transactions" Transactions wasn't found
-    h3 ng-show="transactions.length" Founded transactions: 
+    h3.error.fade-in ng-show="!transactions.length && transactions" Transactions wasnt found
+    h3 ng-show="transactions.length" Transactions found: 
     ul.list-group ng-repeat="category in transactions"
       h4 ng-show="category.transactions.length"
         | {{category.category}}

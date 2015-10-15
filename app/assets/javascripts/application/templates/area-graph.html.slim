@@ -1,0 +1,23 @@
+.row.fade-in
+  .col-md-3
+    | From Date:
+    p.input-group
+      input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="fromDate" is-open="from_opened" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close"
+      span.input-group-btn
+        button type="button" class="btn btn-default" ng-click="from_opened = true"
+          i.glyphicon.glyphicon-calendar
+  .col-md-3
+    | To Date:
+    p.input-group
+      input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="toDate" is-open="to_opened" min-date="fromDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close"
+      span.input-group-btn
+        button type="button" class="btn btn-default" ng-click="to_opened = true"
+          i.glyphicon.glyphicon-calendar
+  .col-md-3
+    br
+    button.btn.btn-default ng-disabled="!fromDate || !toDate" ng-click="getGraph(fromDate, toDate)" Draw graph
+  .col-md-12
+    .error style="text-align:center" ng-hide="hideError" There were no transactions in given period
+    .col-md-12
+      br
+      #area.fade-in
