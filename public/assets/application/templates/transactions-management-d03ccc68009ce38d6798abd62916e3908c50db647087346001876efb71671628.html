@@ -1,0 +1,50 @@
+<div class="row fade-in">
+  <h3 class="white">
+    Search for transactions:
+  </h3>
+  <div class="col-md-6">
+    <form name="queryForm">
+      <p>
+        <input class="form-control" name="query" ng-model="query" placeholder="By comment or value:" required="" type="text" />
+      </p>
+      <button class="btn btn-default" ng-click="search(query)" ng-disabled="queryForm.query.$invalid" type="submit">Search</button>
+    </form>
+    <h3 class="error fade-in" ng-show="!by_query.length &amp;&amp; by_query">
+      Transactions wasnt found
+    </h3>
+    <h3 class="white" ng-show="by_query.length">
+      Transactions found: 
+    </h3>
+    <ul class="list-group white" ng-repeat="category in by_query">
+      <h4 class="white" ng-show="category.transactions.length">
+        {{category.category}}
+      </h4>
+      <li class="list-group-item outgo white fade-in" ng-repeat="transaction in category.transactions">
+        {{ transaction.summ | currency : "₴" }} {{ transaction.comment != null ? "| " + transaction.comment : "" }} {{ "| " + (transaction.transaction_time | date) }}
+      </li>
+    </ul>
+    <br />
+  </div>
+  <div class="col-md-6">
+    <form name="dateForm">
+      <p class="input-group">
+        <input class="form-control" close-text="Close" datepicker-popup="dd-MMMM-yyyy" is-open="from_opened" name="dateQuery" ng-model="date" placeholder="Or by date:" required="" type="text" /><span class="input-group-btn"><button class="btn btn-default" ng-click="from_opened = true" type="button"><i class="glyphicon glyphicon-calendar"></i></button></span>
+      </p>
+      <button class="btn btn-default" ng-click="searchByDate(date)" ng-disabled="dateForm.dateQuery.$invalid" type="submit">Search</button>
+    </form>
+    <h3 class="error fade-in" ng-show="!by_date.length &amp;&amp; by_date">
+      Transactions wasnt found
+    </h3>
+    <h3 class="white" ng-show="by_date.length">
+      Transactions found: 
+    </h3>
+    <ul class="list-group white" ng-repeat="category in by_date">
+      <h4 class="white" ng-show="category.transactions.length">
+        {{category.category}}
+      </h4>
+      <li class="list-group-item outgo white fade-in" ng-repeat="transaction in category.transactions">
+        {{ transaction.summ | currency : "₴" }} {{ transaction.comment != null ? "| " + transaction.comment : "" }} {{ "| " + (transaction.transaction_time | date) }}
+      </li>
+    </ul>
+  </div>
+</div>

@@ -54,13 +54,16 @@ class TransactionsController < ApplicationController
     balance = current_account.balance
     categories = balance.categories
     range = (params[:from].to_date.beginning_of_day..params[:to].to_date.end_of_day)
-
+    colors = ['rgba(98,170,49,0.7)', 'rgba(139,0,139,0.7)', 'rgba(244,164,96,0.7)', 'rgba(0,191,255,0.7)', 'rgba(0,255,127,0.7)', 'rgba(255,140,0,0.7)']
+    i = 0
     response = []
 
     categories.each do |c|
       transactions = c.transactions.select{|t| range.cover?(t.transaction_time)}
       summ = transactions.map(&:summ).inject(0){ |result, elem| result + elem }
-      response << { name:"#{c.name}", y: summ.abs } unless (summ == 0)
+      color = colors[i%colors.length]
+      response << { name:"#{c.name}",color: color, y: summ } unless (summ == 0)
+      i += 1
     end
 
     render json: {response: response}
@@ -73,7 +76,7 @@ class TransactionsController < ApplicationController
     to = params[:to].to_date.end_of_day.to_datetime
 
     expenses = []
-    while (from < to) do
+    while from < to do
       range = (from.to_date.beginning_of_day..from.to_date.end_of_day)
       summ_per_day = []
       categories.each do |c|

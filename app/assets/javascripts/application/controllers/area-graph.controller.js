@@ -11,9 +11,9 @@
           $scope.hideError = true;
           drawGraph(data.response);
         })
-        .error(function(data){
+        .error(function(){
           $scope.hideError = false;
-        })
+        });
       };
 
       var drawGraph = function(data){
@@ -33,7 +33,7 @@
             },
             yAxis: {
                 title: {
-                    text: "Value, ₴"
+                    text: "Value, UAH"
                 }
             },
             legend: {
@@ -73,5 +73,5 @@
             }]
         });  
       };
-    }])
+    }]);
 }());
