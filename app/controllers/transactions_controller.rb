@@ -80,8 +80,7 @@ class TransactionsController < ApplicationController
       range = (from.to_date.beginning_of_day..from.to_date.end_of_day)
       summ_per_day = []
       categories.each do |c|
-        transactions = c.transactions.select{|t| range.cover?(t.transaction_time)}
-        summ = transactions.map(&:summ).inject(0){ |result, elem| result + elem }
+        summ = c.find_transactions_summ_in_range(range)
         summ_per_day << summ
       end
       summ_per_day = summ_per_day.inject(0){ |result, elem| result + elem }
