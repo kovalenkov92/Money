@@ -15,14 +15,14 @@ class TransactionsController < ApplicationController
   end
 
   def create
-    transaction = Transaction.create  summ: params[:transaction][:summ],
-                                      comment: params[:transaction][:comment],
-                                      transaction_time: params[:transaction][:time].to_date,
-                                      category_id: params[:transaction][:category_id]
-
-    category = transaction.category
     balance = current_account.balance
-    if transaction.errors.empty?
+    category = Category.find params[:transaction][:category_id]
+    transaction = Transaction.new summ: params[:transaction][:summ],
+                                  comment: params[:transaction][:comment],
+                                  transaction_time: params[:transaction][:time].to_date
+
+    category.transactions << transaction
+    if transaction.save
       balance.value = balance.value - transaction.summ
       balance.save
       category.value = category.value + transaction.summ
@@ -54,16 +54,11 @@ class TransactionsController < ApplicationController
     balance = current_account.balance
     categories = balance.categories
     range = (params[:from].to_date.beginning_of_day..params[:to].to_date.end_of_day)
-    colors = ['rgba(98,170,49,0.7)', 'rgba(139,0,139,0.7)', 'rgba(244,164,96,0.7)', 'rgba(0,191,255,0.7)', 'rgba(0,255,127,0.7)', 'rgba(255,140,0,0.7)']
-    i = 0
     response = []
 
     categories.each do |c|
-      transactions = c.transactions.select{|t| range.cover?(t.transaction_time)}
-      summ = transactions.map(&:summ).inject(0){ |result, elem| result + elem }
-      color = colors[i%colors.length]
-      response << { name:"#{c.name}",color: color, y: summ } unless (summ == 0)
-      i += 1
+      summ = c.find_transactions_summ_in_range(range)
+      response << { name:"#{c.name}", y: summ } unless (summ == 0)
     end
 
     render json: {response: response}
