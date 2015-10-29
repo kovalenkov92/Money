@@ -72,15 +72,8 @@ class TransactionsController < ApplicationController
 
     expenses = []
     while from < to do
-      range = (from.to_date.beginning_of_day..from.to_date.end_of_day)
-      summ_per_day = []
-      categories.each do |c|
-        summ = c.find_transactions_summ_in_range(range)
-        summ_per_day << summ
-      end
-      summ_per_day = summ_per_day.inject(0){ |result, elem| result + elem }
-      date = (from.to_i.to_s + "000").to_i
-      expenses << [date,summ_per_day]
+      element = loop(from, categories)
+      expenses << element
       from += 1.day
     end
     render json: {response: expenses}
@@ -121,6 +114,18 @@ class TransactionsController < ApplicationController
 
   def is_numeric?(obj)
     obj.to_s == obj.to_i.to_s
+  end
+
+  def loop(from, categories)
+    range = (from.to_date.beginning_of_day..from.to_date.end_of_day)
+    summ_per_day = []
+    categories.each do |c|
+      summ = c.find_transactions_summ_in_range(range)
+      summ_per_day << summ
+    end
+    summ_per_day = summ_per_day.inject(0){ |result, elem| result + elem }
+    date = (from.to_i.to_s + "000").to_i
+    expenses = [date,summ_per_day]
   end
 
 end
