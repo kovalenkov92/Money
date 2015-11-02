@@ -7,8 +7,8 @@ class CategoriesController < ApplicationController
 
   def create
     balance = current_account.balance
-    category = Category.create name: params[:category][:name], balance_id: balance.id
-    if category.errors.empty?
+    category = Category.new name: params[:category][:name], balance_id: balance.id
+    if category.save
       render json: {ok: true}
     else
       render json: {errors: category.errors}, status: :unprocessable_entity

@@ -8,12 +8,12 @@ class IncomesController < ApplicationController
 
   def create
     balance = current_account.balance
-    income = Income.create  balance_id: balance.id, 
+    income = Income.new  balance_id: balance.id, 
                             value: params[:income][:diff],
                             income_time: params[:income][:time].to_date,
                             comment: params[:income][:comment]
 
-    if income.errors.empty?
+    if income.save
       balance.value = balance.value + income.value
       balance.save
       render json: {ok: true}

@@ -15,14 +15,14 @@ class TransactionsController < ApplicationController
   end
 
   def create
-    transaction = Transaction.create  summ: params[:transaction][:summ],
-                                      comment: params[:transaction][:comment],
-                                      transaction_time: params[:transaction][:time].to_date,
-                                      category_id: params[:transaction][:category_id]
-
-    category = transaction.category
     balance = current_account.balance
-    if transaction.errors.empty?
+    transaction = Transaction.new  summ: params[:transaction][:summ],
+                                   comment: params[:transaction][:comment],
+                                   transaction_time: params[:transaction][:time].to_date,
+                                   category_id: params[:transaction][:category_id]
+
+    if transaction.save
+      category = transaction.category
       balance.value = balance.value - transaction.summ
       balance.save
       category.value = category.value + transaction.summ
