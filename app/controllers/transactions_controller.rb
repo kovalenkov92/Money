@@ -102,7 +102,7 @@ class TransactionsController < ApplicationController
       if is_numeric?(params[:query])
         t = c.transactions.where(summ: params[:query])
       else
-        t = c.transactions.where("comment LIKE ?", '%' + params[:query] + '%')
+        t = c.transactions.where("comment ILIKE ?", '%' + params[:query] + '%')
       end
       transactions << {category: c.name, transactions: t.limit(10)} unless t === []
     end
