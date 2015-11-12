@@ -59,7 +59,7 @@ class TransactionsController < ApplicationController
     categories.each do |c|
       transactions = c.transactions.select{|t| range.cover?(t.transaction_time)}
       summ = transactions.map(&:summ).inject(0){ |result, elem| result + elem }
-      response << { name:"#{c.name}",color: "#" + "%06x" % (rand * 0xffffff), y: summ } unless (summ == 0)
+      response << { name:"#{c.name}",color: "rgba(#{rand(255)},#{rand(255)},#{rand(255)},0.6)", y: summ } unless (summ == 0)
     end
 
     render json: {response: response}
