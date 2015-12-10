@@ -1,3 +1,9 @@
 <div ng-include="'<%= asset_path('application/templates/_header.html') %>'" style="margin-bottom:7em"></div>
+<script>
+	var currency_rate_list=new Array("USD","UAH");
+	var currency_template="<a id='currency_template' href=\"$link\">The $from_abbrev is worth <b>$rate</b> $to_abbrevs </a><br>";
+	var currency_round=true;
+</script>
+<script src="http://coinmill.com/frame.js"></script>
 
 <div class="container" ui-view></div>
