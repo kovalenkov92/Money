@@ -72,7 +72,7 @@ class TransactionsController < ApplicationController
 
     expenses = []
     while from < to do
-      element = loop(from, categories)
+      element = calculate_sum_per_day(from, categories)
       expenses << element
       from += 1.day
     end
@@ -116,7 +116,7 @@ class TransactionsController < ApplicationController
     obj.to_s == obj.to_i.to_s
   end
 
-  def loop(from, categories)
+  def calculate_sum_per_day(from, categories)
     range = (from.to_date.beginning_of_day..from.to_date.end_of_day)
     summ_per_day = []
     categories.each do |c|
