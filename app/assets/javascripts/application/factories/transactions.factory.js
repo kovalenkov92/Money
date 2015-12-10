@@ -11,8 +11,8 @@
         }else{
           time = new Date();
           time = time.toString();
-        };
-        return $http.post('/transactions', {transaction: {summ: summ, 
+        }
+        return $http.post('/transactions', {transaction: {summ: summ,
                                                           category_id: category_id, 
                                                           comment: comment,
                                                           time: time}
@@ -30,7 +30,8 @@
       startSearch: function(query) {
         if (query === undefined) {
           query = "";
-        };
+        }
+
         return $http.get('/transactions/search?query=' + query);
       },
       startSearchByDate: function(date) {

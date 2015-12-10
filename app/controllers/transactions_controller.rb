@@ -16,13 +16,13 @@ class TransactionsController < ApplicationController
 
   def create
     balance = current_account.balance
-    transaction = Transaction.new  summ: params[:transaction][:summ],
-                                   comment: params[:transaction][:comment],
-                                   transaction_time: params[:transaction][:time].to_date,
-                                   category_id: params[:transaction][:category_id]
+    category = Category.find params[:transaction][:category_id]
+    transaction = Transaction.new summ: params[:transaction][:summ],
+                                  comment: params[:transaction][:comment],
+                                  transaction_time: params[:transaction][:time].to_date
 
+    category.transactions << transaction
     if transaction.save
-      category = transaction.category
       balance.value = balance.value - transaction.summ
       balance.save
       category.value = category.value + transaction.summ
@@ -57,11 +57,9 @@ class TransactionsController < ApplicationController
     response = []
 
     categories.each do |c|
-      transactions = c.transactions.select{|t| range.cover?(t.transaction_time)}
-      summ = transactions.map(&:summ).inject(0){ |result, elem| result + elem }
+      summ = c.find_transactions_summ_in_range(range)
       response << { name:"#{c.name}",color: "rgba(#{rand(255)},#{rand(255)},#{rand(255)},0.6)", y: summ } unless (summ == 0)
     end
-
     render json: {response: response}
   end
 
@@ -73,16 +71,8 @@ class TransactionsController < ApplicationController
 
     expenses = []
     while from < to do
-      range = (from.to_date.beginning_of_day..from.to_date.end_of_day)
-      summ_per_day = []
-      categories.each do |c|
-        transactions = c.transactions.select{|t| range.cover?(t.transaction_time)}
-        summ = transactions.map(&:summ).inject(0){ |result, elem| result + elem }
-        summ_per_day << summ
-      end
-      summ_per_day = summ_per_day.inject(0){ |result, elem| result + elem }
-      date = (from.to_i.to_s + "000").to_i
-      expenses << [date,summ_per_day]
+      element = calculate_sum_per_day(from, categories)
+      expenses << element
       from += 1.day
     end
     render json: {response: expenses}
@@ -123,6 +113,18 @@ class TransactionsController < ApplicationController
 
   def is_numeric?(obj)
     obj.to_s == obj.to_i.to_s
+  end
+
+  def calculate_sum_per_day(from, categories)
+    range = (from.to_date.beginning_of_day..from.to_date.end_of_day)
+    summ_per_day = []
+    categories.each do |c|
+      summ = c.find_transactions_summ_in_range(range)
+      summ_per_day << summ
+    end
+    summ_per_day = summ_per_day.inject(0){ |result, elem| result + elem }
+    date = (from.to_i.to_s + "000").to_i
+    expenses = [date,summ_per_day]
   end
 
 end

@@ -6,4 +6,8 @@ class Category < ActiveRecord::Base
 
 	validates_presence_of :name
 
+	def find_transactions_summ_in_range(range)
+    transactions = self.transactions.select{|t| range.cover?(t.transaction_time)}
+    transactions.map(&:summ).inject(0){ |result, elem| result + elem }
+	end
 end
